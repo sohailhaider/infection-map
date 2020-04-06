@@ -63,10 +63,36 @@ async function addDuration(parent, args, context) {
   })
 }
 
+async function deleteUserVisits(parent, args, context) {
+  const userId = getUserId(context);
+  await context.prisma.deleteManyLocations({
+    visit: {
+      user: {
+        id: userId
+      }
+    }
+  })
+  await context.prisma.deleteManyDurations({
+    visit: {
+      user: {
+        id: userId
+      }
+    }
+  });
+  const response = await context.prisma.deleteManyVisits({
+    user: 
+    {
+      id: userId
+    }
+  });
+  return response.count;
+}
+
 module.exports = {
     login,
     signup,
     addVisit,
     addLocation,
-    addDuration
+    addDuration,
+    deleteUserVisits
 }

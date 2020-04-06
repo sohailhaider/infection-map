@@ -12,6 +12,7 @@ type Mutation {
     addVisit(placeConfidence: String, centerLatE7: Int, centerLngE7: Int, visitConfidence: Float): Visit
     addLocation(visitId: ID!, latitudeE7: Int, longitudeE7: Int, placeId: String, address: String, name: String, sourceInfo: String): Location
     addDuration(visitId: ID!, startTimestampMs: String, endTimestampMs: String): Duration
+    deleteUserVisits:Int
 }
 
 type User {
