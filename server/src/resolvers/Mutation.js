@@ -43,8 +43,21 @@ async function addVisit(parent, args, context) {
     });
 }
 
+async function addLocation(parent, args, context) {
+  return context.prisma.createLocation({
+    latitudeE7: args.latitudeE7,
+    longitudeE7: args.longitudeE7,
+    placeId: args.placeId,
+    address: args.address,
+    name: args.name,
+    sourceInfo: args.sourceInfo,
+    visit: {connect: {id: args.visitId}}
+  });
+}
+
 module.exports = {
     login,
     signup,
-    addVisit
+    addVisit,
+    addLocation
 }
