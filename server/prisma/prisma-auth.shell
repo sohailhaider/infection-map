@@ -1,0 +1,2 @@
+export PRISMA_MANAGEMENT_API_SECRET="mysecret42"
+//Copy Paste Whole Command
