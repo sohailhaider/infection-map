@@ -55,9 +55,18 @@ async function addLocation(parent, args, context) {
   });
 }
 
+async function addDuration(parent, args, context) {
+  return context.prisma.createDuration({
+    startTimestampMs: args.startTimestampMs, 
+    endTimestampMs: args.startTimestampMs,
+    visit: {connect: {id: args.visitId}}
+  })
+}
+
 module.exports = {
     login,
     signup,
     addVisit,
-    addLocation
+    addLocation,
+    addDuration
 }
