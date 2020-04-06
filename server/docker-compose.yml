@@ -1,6 +1,6 @@
 version: '3'
 services:
-  prisma_maps:
+  prisma:
     image: prismagraphql/prisma:1.34
     restart: always
     ports:
@@ -12,8 +12,8 @@ services:
         databases:
           default:
             connector: mongo
-            uri: mongodb://prisma:prisma@mongo-db_maps
-  mongo-db_maps:
+            uri: mongodb://prisma:prisma@mongo-db
+  mongo-db:
     image: mongo:3.6
     restart: always
     environment:
@@ -22,6 +22,6 @@ services:
     ports:
       - '27017:27017'
     volumes:
-      - mongo:/var/lib/mongo_maps
+      - mongo:/var/lib/mongo
 volumes: 
   mongo:

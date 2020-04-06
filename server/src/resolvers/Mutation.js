@@ -32,7 +32,19 @@ async function login(parent, args, context) {
   }
 }
 
+async function addVisit(parent, args, context) {
+    const userId = getUserId(context);
+    return context.prisma.createVisit({
+      placeConfidence: args.placeConfidence, 
+      centerLatE7: args.centerLatE7, 
+      centerLngE7: args.centerLngE7, 
+      visitConfidence: args.visitConfidence,
+      user: {connect: {id: userId}}
+    });
+}
+
 module.exports = {
     login,
-    signup
+    signup,
+    addVisit
 }
