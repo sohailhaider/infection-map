@@ -16,7 +16,11 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
+  candidateLocation: (where?: CandidateLocationWhereInput) => Promise<boolean>;
+  duration: (where?: DurationWhereInput) => Promise<boolean>;
+  location: (where?: LocationWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
+  visit: (where?: VisitWhereInput) => Promise<boolean>;
 }
 
 export interface Node {}
@@ -38,6 +42,65 @@ export interface Prisma {
    * Queries
    */
 
+  candidateLocation: (
+    where: CandidateLocationWhereUniqueInput
+  ) => CandidateLocationNullablePromise;
+  candidateLocations: (args?: {
+    where?: CandidateLocationWhereInput;
+    orderBy?: CandidateLocationOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<CandidateLocation>;
+  candidateLocationsConnection: (args?: {
+    where?: CandidateLocationWhereInput;
+    orderBy?: CandidateLocationOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => CandidateLocationConnectionPromise;
+  duration: (where: DurationWhereUniqueInput) => DurationNullablePromise;
+  durations: (args?: {
+    where?: DurationWhereInput;
+    orderBy?: DurationOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Duration>;
+  durationsConnection: (args?: {
+    where?: DurationWhereInput;
+    orderBy?: DurationOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => DurationConnectionPromise;
+  location: (where: LocationWhereUniqueInput) => LocationNullablePromise;
+  locations: (args?: {
+    where?: LocationWhereInput;
+    orderBy?: LocationOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Location>;
+  locationsConnection: (args?: {
+    where?: LocationWhereInput;
+    orderBy?: LocationOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => LocationConnectionPromise;
   user: (where: UserWhereUniqueInput) => UserNullablePromise;
   users: (args?: {
     where?: UserWhereInput;
@@ -57,12 +120,85 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => UserConnectionPromise;
+  visit: (where: VisitWhereUniqueInput) => VisitNullablePromise;
+  visits: (args?: {
+    where?: VisitWhereInput;
+    orderBy?: VisitOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Visit>;
+  visitsConnection: (args?: {
+    where?: VisitWhereInput;
+    orderBy?: VisitOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => VisitConnectionPromise;
   node: (args: { id: ID_Output }) => Node;
 
   /**
    * Mutations
    */
 
+  createCandidateLocation: (
+    data: CandidateLocationCreateInput
+  ) => CandidateLocationPromise;
+  updateCandidateLocation: (args: {
+    data: CandidateLocationUpdateInput;
+    where: CandidateLocationWhereUniqueInput;
+  }) => CandidateLocationPromise;
+  updateManyCandidateLocations: (args: {
+    data: CandidateLocationUpdateManyMutationInput;
+    where?: CandidateLocationWhereInput;
+  }) => BatchPayloadPromise;
+  upsertCandidateLocation: (args: {
+    where: CandidateLocationWhereUniqueInput;
+    create: CandidateLocationCreateInput;
+    update: CandidateLocationUpdateInput;
+  }) => CandidateLocationPromise;
+  deleteCandidateLocation: (
+    where: CandidateLocationWhereUniqueInput
+  ) => CandidateLocationPromise;
+  deleteManyCandidateLocations: (
+    where?: CandidateLocationWhereInput
+  ) => BatchPayloadPromise;
+  createDuration: (data: DurationCreateInput) => DurationPromise;
+  updateDuration: (args: {
+    data: DurationUpdateInput;
+    where: DurationWhereUniqueInput;
+  }) => DurationPromise;
+  updateManyDurations: (args: {
+    data: DurationUpdateManyMutationInput;
+    where?: DurationWhereInput;
+  }) => BatchPayloadPromise;
+  upsertDuration: (args: {
+    where: DurationWhereUniqueInput;
+    create: DurationCreateInput;
+    update: DurationUpdateInput;
+  }) => DurationPromise;
+  deleteDuration: (where: DurationWhereUniqueInput) => DurationPromise;
+  deleteManyDurations: (where?: DurationWhereInput) => BatchPayloadPromise;
+  createLocation: (data: LocationCreateInput) => LocationPromise;
+  updateLocation: (args: {
+    data: LocationUpdateInput;
+    where: LocationWhereUniqueInput;
+  }) => LocationPromise;
+  updateManyLocations: (args: {
+    data: LocationUpdateManyMutationInput;
+    where?: LocationWhereInput;
+  }) => BatchPayloadPromise;
+  upsertLocation: (args: {
+    where: LocationWhereUniqueInput;
+    create: LocationCreateInput;
+    update: LocationUpdateInput;
+  }) => LocationPromise;
+  deleteLocation: (where: LocationWhereUniqueInput) => LocationPromise;
+  deleteManyLocations: (where?: LocationWhereInput) => BatchPayloadPromise;
   createUser: (data: UserCreateInput) => UserPromise;
   updateUser: (args: {
     data: UserUpdateInput;
@@ -79,6 +215,22 @@ export interface Prisma {
   }) => UserPromise;
   deleteUser: (where: UserWhereUniqueInput) => UserPromise;
   deleteManyUsers: (where?: UserWhereInput) => BatchPayloadPromise;
+  createVisit: (data: VisitCreateInput) => VisitPromise;
+  updateVisit: (args: {
+    data: VisitUpdateInput;
+    where: VisitWhereUniqueInput;
+  }) => VisitPromise;
+  updateManyVisits: (args: {
+    data: VisitUpdateManyMutationInput;
+    where?: VisitWhereInput;
+  }) => BatchPayloadPromise;
+  upsertVisit: (args: {
+    where: VisitWhereUniqueInput;
+    create: VisitCreateInput;
+    update: VisitUpdateInput;
+  }) => VisitPromise;
+  deleteVisit: (where: VisitWhereUniqueInput) => VisitPromise;
+  deleteManyVisits: (where?: VisitWhereInput) => BatchPayloadPromise;
 
   /**
    * Subscriptions
@@ -88,9 +240,21 @@ export interface Prisma {
 }
 
 export interface Subscription {
+  candidateLocation: (
+    where?: CandidateLocationSubscriptionWhereInput
+  ) => CandidateLocationSubscriptionPayloadSubscription;
+  duration: (
+    where?: DurationSubscriptionWhereInput
+  ) => DurationSubscriptionPayloadSubscription;
+  location: (
+    where?: LocationSubscriptionWhereInput
+  ) => LocationSubscriptionPayloadSubscription;
   user: (
     where?: UserSubscriptionWhereInput
   ) => UserSubscriptionPayloadSubscription;
+  visit: (
+    where?: VisitSubscriptionWhereInput
+  ) => VisitSubscriptionPayloadSubscription;
 }
 
 export interface ClientConstructor<T> {
@@ -100,6 +264,54 @@ export interface ClientConstructor<T> {
 /**
  * Types
  */
+
+export type CandidateLocationOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "latitudeE7_ASC"
+  | "latitudeE7_DESC"
+  | "longitudeE7_ASC"
+  | "longitudeE7_DESC"
+  | "placeId_ASC"
+  | "placeId_DESC"
+  | "locationConfidence_ASC"
+  | "locationConfidence_DESC";
+
+export type VisitOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "placeConfidence_ASC"
+  | "placeConfidence_DESC"
+  | "centerLatE7_ASC"
+  | "centerLatE7_DESC"
+  | "centerLngE7_ASC"
+  | "centerLngE7_DESC"
+  | "visitConfidence_ASC"
+  | "visitConfidence_DESC";
+
+export type DurationOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "startTimestampMs_ASC"
+  | "startTimestampMs_DESC"
+  | "endTimestampMs_ASC"
+  | "endTimestampMs_DESC";
+
+export type LocationOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "latitudeE7_ASC"
+  | "latitudeE7_DESC"
+  | "longitudeE7_ASC"
+  | "longitudeE7_DESC"
+  | "placeId_ASC"
+  | "placeId_DESC"
+  | "address_ASC"
+  | "address_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "sourceInfo_ASC"
+  | "sourceInfo_DESC";
 
 export type UserOrderByInput =
   | "id_ASC"
@@ -113,23 +325,134 @@ export type UserOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export interface UserCreateInput {
+export interface UserUpdateWithoutVisitsDataInput {
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  password?: Maybe<String>;
+}
+
+export type CandidateLocationWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface DurationCreateWithoutVisitInput {
+  id?: Maybe<ID_Input>;
+  startTimestampMs?: Maybe<String>;
+  endTimestampMs?: Maybe<String>;
+}
+
+export interface VisitCreateWithoutLocationInput {
+  id?: Maybe<ID_Input>;
+  duration?: Maybe<DurationCreateOneWithoutVisitInput>;
+  placeConfidence?: Maybe<String>;
+  centerLatE7?: Maybe<Int>;
+  centerLngE7?: Maybe<Int>;
+  visitConfidence?: Maybe<Float>;
+  otherCandidateLocations?: Maybe<CandidateLocationCreateManyWithoutVisitInput>;
+  user?: Maybe<UserCreateOneWithoutVisitsInput>;
+}
+
+export interface UserCreateOneWithoutVisitsInput {
+  create?: Maybe<UserCreateWithoutVisitsInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface LocationWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  latitudeE7?: Maybe<Int>;
+  latitudeE7_not?: Maybe<Int>;
+  latitudeE7_in?: Maybe<Int[] | Int>;
+  latitudeE7_not_in?: Maybe<Int[] | Int>;
+  latitudeE7_lt?: Maybe<Int>;
+  latitudeE7_lte?: Maybe<Int>;
+  latitudeE7_gt?: Maybe<Int>;
+  latitudeE7_gte?: Maybe<Int>;
+  longitudeE7?: Maybe<Int>;
+  longitudeE7_not?: Maybe<Int>;
+  longitudeE7_in?: Maybe<Int[] | Int>;
+  longitudeE7_not_in?: Maybe<Int[] | Int>;
+  longitudeE7_lt?: Maybe<Int>;
+  longitudeE7_lte?: Maybe<Int>;
+  longitudeE7_gt?: Maybe<Int>;
+  longitudeE7_gte?: Maybe<Int>;
+  placeId?: Maybe<String>;
+  placeId_not?: Maybe<String>;
+  placeId_in?: Maybe<String[] | String>;
+  placeId_not_in?: Maybe<String[] | String>;
+  placeId_lt?: Maybe<String>;
+  placeId_lte?: Maybe<String>;
+  placeId_gt?: Maybe<String>;
+  placeId_gte?: Maybe<String>;
+  placeId_contains?: Maybe<String>;
+  placeId_not_contains?: Maybe<String>;
+  placeId_starts_with?: Maybe<String>;
+  placeId_not_starts_with?: Maybe<String>;
+  placeId_ends_with?: Maybe<String>;
+  placeId_not_ends_with?: Maybe<String>;
+  address?: Maybe<String>;
+  address_not?: Maybe<String>;
+  address_in?: Maybe<String[] | String>;
+  address_not_in?: Maybe<String[] | String>;
+  address_lt?: Maybe<String>;
+  address_lte?: Maybe<String>;
+  address_gt?: Maybe<String>;
+  address_gte?: Maybe<String>;
+  address_contains?: Maybe<String>;
+  address_not_contains?: Maybe<String>;
+  address_starts_with?: Maybe<String>;
+  address_not_starts_with?: Maybe<String>;
+  address_ends_with?: Maybe<String>;
+  address_not_ends_with?: Maybe<String>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  sourceInfo?: Maybe<String>;
+  sourceInfo_not?: Maybe<String>;
+  sourceInfo_in?: Maybe<String[] | String>;
+  sourceInfo_not_in?: Maybe<String[] | String>;
+  sourceInfo_lt?: Maybe<String>;
+  sourceInfo_lte?: Maybe<String>;
+  sourceInfo_gt?: Maybe<String>;
+  sourceInfo_gte?: Maybe<String>;
+  sourceInfo_contains?: Maybe<String>;
+  sourceInfo_not_contains?: Maybe<String>;
+  sourceInfo_starts_with?: Maybe<String>;
+  sourceInfo_not_starts_with?: Maybe<String>;
+  sourceInfo_ends_with?: Maybe<String>;
+  sourceInfo_not_ends_with?: Maybe<String>;
+  visit?: Maybe<VisitWhereInput>;
+  AND?: Maybe<LocationWhereInput[] | LocationWhereInput>;
+}
+
+export interface UserCreateWithoutVisitsInput {
   id?: Maybe<ID_Input>;
   name?: Maybe<String>;
   email: String;
   password: String;
-}
-
-export interface UserUpdateInput {
-  name?: Maybe<String>;
-  email?: Maybe<String>;
-  password?: Maybe<String>;
-}
-
-export interface UserUpdateManyMutationInput {
-  name?: Maybe<String>;
-  email?: Maybe<String>;
-  password?: Maybe<String>;
 }
 
 export interface UserWhereInput {
@@ -189,7 +512,16 @@ export interface UserWhereInput {
   password_not_starts_with?: Maybe<String>;
   password_ends_with?: Maybe<String>;
   password_not_ends_with?: Maybe<String>;
+  visits_some?: Maybe<VisitWhereInput>;
   AND?: Maybe<UserWhereInput[] | UserWhereInput>;
+}
+
+export interface CandidateLocationUpdateInput {
+  latitudeE7?: Maybe<Int>;
+  longitudeE7?: Maybe<Int>;
+  placeId?: Maybe<String>;
+  locationConfidence?: Maybe<Float>;
+  visit?: Maybe<VisitUpdateOneWithoutOtherCandidateLocationsInput>;
 }
 
 export interface UserSubscriptionWhereInput {
@@ -201,29 +533,805 @@ export interface UserSubscriptionWhereInput {
   AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
 }
 
+export interface VisitUpdateOneWithoutOtherCandidateLocationsInput {
+  create?: Maybe<VisitCreateWithoutOtherCandidateLocationsInput>;
+  update?: Maybe<VisitUpdateWithoutOtherCandidateLocationsDataInput>;
+  upsert?: Maybe<VisitUpsertWithoutOtherCandidateLocationsInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<VisitWhereUniqueInput>;
+}
+
+export interface DurationSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<DurationWhereInput>;
+  AND?: Maybe<
+    DurationSubscriptionWhereInput[] | DurationSubscriptionWhereInput
+  >;
+}
+
+export interface VisitUpdateWithoutOtherCandidateLocationsDataInput {
+  location?: Maybe<LocationUpdateOneWithoutVisitInput>;
+  duration?: Maybe<DurationUpdateOneWithoutVisitInput>;
+  placeConfidence?: Maybe<String>;
+  centerLatE7?: Maybe<Int>;
+  centerLngE7?: Maybe<Int>;
+  visitConfidence?: Maybe<Float>;
+  user?: Maybe<UserUpdateOneWithoutVisitsInput>;
+}
+
+export interface VisitUpdateManyMutationInput {
+  placeConfidence?: Maybe<String>;
+  centerLatE7?: Maybe<Int>;
+  centerLngE7?: Maybe<Int>;
+  visitConfidence?: Maybe<Float>;
+}
+
+export interface LocationUpdateOneWithoutVisitInput {
+  create?: Maybe<LocationCreateWithoutVisitInput>;
+  update?: Maybe<LocationUpdateWithoutVisitDataInput>;
+  upsert?: Maybe<LocationUpsertWithoutVisitInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<LocationWhereUniqueInput>;
+}
+
+export interface VisitCreateInput {
+  id?: Maybe<ID_Input>;
+  location?: Maybe<LocationCreateOneWithoutVisitInput>;
+  duration?: Maybe<DurationCreateOneWithoutVisitInput>;
+  placeConfidence?: Maybe<String>;
+  centerLatE7?: Maybe<Int>;
+  centerLngE7?: Maybe<Int>;
+  visitConfidence?: Maybe<Float>;
+  otherCandidateLocations?: Maybe<CandidateLocationCreateManyWithoutVisitInput>;
+  user?: Maybe<UserCreateOneWithoutVisitsInput>;
+}
+
+export interface LocationUpdateWithoutVisitDataInput {
+  latitudeE7?: Maybe<Int>;
+  longitudeE7?: Maybe<Int>;
+  placeId?: Maybe<String>;
+  address?: Maybe<String>;
+  name?: Maybe<String>;
+  sourceInfo?: Maybe<String>;
+}
+
+export interface UserUpdateManyMutationInput {
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  password?: Maybe<String>;
+}
+
+export interface LocationUpsertWithoutVisitInput {
+  update: LocationUpdateWithoutVisitDataInput;
+  create: LocationCreateWithoutVisitInput;
+}
+
+export interface VisitUpdateManyWithWhereNestedInput {
+  where: VisitScalarWhereInput;
+  data: VisitUpdateManyDataInput;
+}
+
+export interface DurationUpdateOneWithoutVisitInput {
+  create?: Maybe<DurationCreateWithoutVisitInput>;
+  update?: Maybe<DurationUpdateWithoutVisitDataInput>;
+  upsert?: Maybe<DurationUpsertWithoutVisitInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<DurationWhereUniqueInput>;
+}
+
+export type LocationWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface DurationUpdateWithoutVisitDataInput {
+  startTimestampMs?: Maybe<String>;
+  endTimestampMs?: Maybe<String>;
+}
+
+export interface VisitUpdateWithoutUserDataInput {
+  location?: Maybe<LocationUpdateOneWithoutVisitInput>;
+  duration?: Maybe<DurationUpdateOneWithoutVisitInput>;
+  placeConfidence?: Maybe<String>;
+  centerLatE7?: Maybe<Int>;
+  centerLngE7?: Maybe<Int>;
+  visitConfidence?: Maybe<Float>;
+  otherCandidateLocations?: Maybe<CandidateLocationUpdateManyWithoutVisitInput>;
+}
+
+export interface DurationUpsertWithoutVisitInput {
+  update: DurationUpdateWithoutVisitDataInput;
+  create: DurationCreateWithoutVisitInput;
+}
+
+export interface VisitUpdateManyWithoutUserInput {
+  create?: Maybe<VisitCreateWithoutUserInput[] | VisitCreateWithoutUserInput>;
+  delete?: Maybe<VisitWhereUniqueInput[] | VisitWhereUniqueInput>;
+  connect?: Maybe<VisitWhereUniqueInput[] | VisitWhereUniqueInput>;
+  set?: Maybe<VisitWhereUniqueInput[] | VisitWhereUniqueInput>;
+  disconnect?: Maybe<VisitWhereUniqueInput[] | VisitWhereUniqueInput>;
+  update?: Maybe<
+    | VisitUpdateWithWhereUniqueWithoutUserInput[]
+    | VisitUpdateWithWhereUniqueWithoutUserInput
+  >;
+  upsert?: Maybe<
+    | VisitUpsertWithWhereUniqueWithoutUserInput[]
+    | VisitUpsertWithWhereUniqueWithoutUserInput
+  >;
+  deleteMany?: Maybe<VisitScalarWhereInput[] | VisitScalarWhereInput>;
+  updateMany?: Maybe<
+    VisitUpdateManyWithWhereNestedInput[] | VisitUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface UserUpdateOneWithoutVisitsInput {
+  create?: Maybe<UserCreateWithoutVisitsInput>;
+  update?: Maybe<UserUpdateWithoutVisitsDataInput>;
+  upsert?: Maybe<UserUpsertWithoutVisitsInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserUpdateInput {
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  password?: Maybe<String>;
+  visits?: Maybe<VisitUpdateManyWithoutUserInput>;
+}
+
+export interface VisitUpdateOneWithoutLocationInput {
+  create?: Maybe<VisitCreateWithoutLocationInput>;
+  update?: Maybe<VisitUpdateWithoutLocationDataInput>;
+  upsert?: Maybe<VisitUpsertWithoutLocationInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<VisitWhereUniqueInput>;
+}
+
+export interface VisitCreateManyWithoutUserInput {
+  create?: Maybe<VisitCreateWithoutUserInput[] | VisitCreateWithoutUserInput>;
+  connect?: Maybe<VisitWhereUniqueInput[] | VisitWhereUniqueInput>;
+}
+
+export interface UserUpsertWithoutVisitsInput {
+  update: UserUpdateWithoutVisitsDataInput;
+  create: UserCreateWithoutVisitsInput;
+}
+
+export type VisitWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface VisitUpsertWithoutOtherCandidateLocationsInput {
+  update: VisitUpdateWithoutOtherCandidateLocationsDataInput;
+  create: VisitCreateWithoutOtherCandidateLocationsInput;
+}
+
+export interface VisitUpsertWithoutLocationInput {
+  update: VisitUpdateWithoutLocationDataInput;
+  create: VisitCreateWithoutLocationInput;
+}
+
+export interface CandidateLocationCreateInput {
+  id?: Maybe<ID_Input>;
+  latitudeE7?: Maybe<Int>;
+  longitudeE7?: Maybe<Int>;
+  placeId?: Maybe<String>;
+  locationConfidence?: Maybe<Float>;
+  visit?: Maybe<VisitCreateOneWithoutOtherCandidateLocationsInput>;
+}
+
+export interface VisitCreateOneWithoutLocationInput {
+  create?: Maybe<VisitCreateWithoutLocationInput>;
+  connect?: Maybe<VisitWhereUniqueInput>;
+}
+
+export interface CandidateLocationWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  latitudeE7?: Maybe<Int>;
+  latitudeE7_not?: Maybe<Int>;
+  latitudeE7_in?: Maybe<Int[] | Int>;
+  latitudeE7_not_in?: Maybe<Int[] | Int>;
+  latitudeE7_lt?: Maybe<Int>;
+  latitudeE7_lte?: Maybe<Int>;
+  latitudeE7_gt?: Maybe<Int>;
+  latitudeE7_gte?: Maybe<Int>;
+  longitudeE7?: Maybe<Int>;
+  longitudeE7_not?: Maybe<Int>;
+  longitudeE7_in?: Maybe<Int[] | Int>;
+  longitudeE7_not_in?: Maybe<Int[] | Int>;
+  longitudeE7_lt?: Maybe<Int>;
+  longitudeE7_lte?: Maybe<Int>;
+  longitudeE7_gt?: Maybe<Int>;
+  longitudeE7_gte?: Maybe<Int>;
+  placeId?: Maybe<String>;
+  placeId_not?: Maybe<String>;
+  placeId_in?: Maybe<String[] | String>;
+  placeId_not_in?: Maybe<String[] | String>;
+  placeId_lt?: Maybe<String>;
+  placeId_lte?: Maybe<String>;
+  placeId_gt?: Maybe<String>;
+  placeId_gte?: Maybe<String>;
+  placeId_contains?: Maybe<String>;
+  placeId_not_contains?: Maybe<String>;
+  placeId_starts_with?: Maybe<String>;
+  placeId_not_starts_with?: Maybe<String>;
+  placeId_ends_with?: Maybe<String>;
+  placeId_not_ends_with?: Maybe<String>;
+  locationConfidence?: Maybe<Float>;
+  locationConfidence_not?: Maybe<Float>;
+  locationConfidence_in?: Maybe<Float[] | Float>;
+  locationConfidence_not_in?: Maybe<Float[] | Float>;
+  locationConfidence_lt?: Maybe<Float>;
+  locationConfidence_lte?: Maybe<Float>;
+  locationConfidence_gt?: Maybe<Float>;
+  locationConfidence_gte?: Maybe<Float>;
+  visit?: Maybe<VisitWhereInput>;
+  AND?: Maybe<CandidateLocationWhereInput[] | CandidateLocationWhereInput>;
+}
+
+export interface CandidateLocationUpdateManyMutationInput {
+  latitudeE7?: Maybe<Int>;
+  longitudeE7?: Maybe<Int>;
+  placeId?: Maybe<String>;
+  locationConfidence?: Maybe<Float>;
+}
+
+export interface LocationUpdateInput {
+  latitudeE7?: Maybe<Int>;
+  longitudeE7?: Maybe<Int>;
+  placeId?: Maybe<String>;
+  address?: Maybe<String>;
+  name?: Maybe<String>;
+  sourceInfo?: Maybe<String>;
+  visit?: Maybe<VisitUpdateOneWithoutLocationInput>;
+}
+
+export interface VisitCreateWithoutOtherCandidateLocationsInput {
+  id?: Maybe<ID_Input>;
+  location?: Maybe<LocationCreateOneWithoutVisitInput>;
+  duration?: Maybe<DurationCreateOneWithoutVisitInput>;
+  placeConfidence?: Maybe<String>;
+  centerLatE7?: Maybe<Int>;
+  centerLngE7?: Maybe<Int>;
+  visitConfidence?: Maybe<Float>;
+  user?: Maybe<UserCreateOneWithoutVisitsInput>;
+}
+
+export interface DurationCreateInput {
+  id?: Maybe<ID_Input>;
+  startTimestampMs?: Maybe<String>;
+  endTimestampMs?: Maybe<String>;
+  visit?: Maybe<VisitCreateOneWithoutDurationInput>;
+}
+
+export interface LocationCreateWithoutVisitInput {
+  id?: Maybe<ID_Input>;
+  latitudeE7?: Maybe<Int>;
+  longitudeE7?: Maybe<Int>;
+  placeId?: Maybe<String>;
+  address?: Maybe<String>;
+  name?: Maybe<String>;
+  sourceInfo?: Maybe<String>;
+}
+
+export interface VisitCreateOneWithoutDurationInput {
+  create?: Maybe<VisitCreateWithoutDurationInput>;
+  connect?: Maybe<VisitWhereUniqueInput>;
+}
+
+export interface VisitWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  location?: Maybe<LocationWhereInput>;
+  duration?: Maybe<DurationWhereInput>;
+  placeConfidence?: Maybe<String>;
+  placeConfidence_not?: Maybe<String>;
+  placeConfidence_in?: Maybe<String[] | String>;
+  placeConfidence_not_in?: Maybe<String[] | String>;
+  placeConfidence_lt?: Maybe<String>;
+  placeConfidence_lte?: Maybe<String>;
+  placeConfidence_gt?: Maybe<String>;
+  placeConfidence_gte?: Maybe<String>;
+  placeConfidence_contains?: Maybe<String>;
+  placeConfidence_not_contains?: Maybe<String>;
+  placeConfidence_starts_with?: Maybe<String>;
+  placeConfidence_not_starts_with?: Maybe<String>;
+  placeConfidence_ends_with?: Maybe<String>;
+  placeConfidence_not_ends_with?: Maybe<String>;
+  centerLatE7?: Maybe<Int>;
+  centerLatE7_not?: Maybe<Int>;
+  centerLatE7_in?: Maybe<Int[] | Int>;
+  centerLatE7_not_in?: Maybe<Int[] | Int>;
+  centerLatE7_lt?: Maybe<Int>;
+  centerLatE7_lte?: Maybe<Int>;
+  centerLatE7_gt?: Maybe<Int>;
+  centerLatE7_gte?: Maybe<Int>;
+  centerLngE7?: Maybe<Int>;
+  centerLngE7_not?: Maybe<Int>;
+  centerLngE7_in?: Maybe<Int[] | Int>;
+  centerLngE7_not_in?: Maybe<Int[] | Int>;
+  centerLngE7_lt?: Maybe<Int>;
+  centerLngE7_lte?: Maybe<Int>;
+  centerLngE7_gt?: Maybe<Int>;
+  centerLngE7_gte?: Maybe<Int>;
+  visitConfidence?: Maybe<Float>;
+  visitConfidence_not?: Maybe<Float>;
+  visitConfidence_in?: Maybe<Float[] | Float>;
+  visitConfidence_not_in?: Maybe<Float[] | Float>;
+  visitConfidence_lt?: Maybe<Float>;
+  visitConfidence_lte?: Maybe<Float>;
+  visitConfidence_gt?: Maybe<Float>;
+  visitConfidence_gte?: Maybe<Float>;
+  otherCandidateLocations_some?: Maybe<CandidateLocationWhereInput>;
+  user?: Maybe<UserWhereInput>;
+  AND?: Maybe<VisitWhereInput[] | VisitWhereInput>;
+}
+
+export interface VisitCreateWithoutDurationInput {
+  id?: Maybe<ID_Input>;
+  location?: Maybe<LocationCreateOneWithoutVisitInput>;
+  placeConfidence?: Maybe<String>;
+  centerLatE7?: Maybe<Int>;
+  centerLngE7?: Maybe<Int>;
+  visitConfidence?: Maybe<Float>;
+  otherCandidateLocations?: Maybe<CandidateLocationCreateManyWithoutVisitInput>;
+  user?: Maybe<UserCreateOneWithoutVisitsInput>;
+}
+
+export interface VisitSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<VisitWhereInput>;
+  AND?: Maybe<VisitSubscriptionWhereInput[] | VisitSubscriptionWhereInput>;
+}
+
+export interface CandidateLocationCreateManyWithoutVisitInput {
+  create?: Maybe<
+    | CandidateLocationCreateWithoutVisitInput[]
+    | CandidateLocationCreateWithoutVisitInput
+  >;
+  connect?: Maybe<
+    CandidateLocationWhereUniqueInput[] | CandidateLocationWhereUniqueInput
+  >;
+}
+
+export interface CandidateLocationSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<CandidateLocationWhereInput>;
+  AND?: Maybe<
+    | CandidateLocationSubscriptionWhereInput[]
+    | CandidateLocationSubscriptionWhereInput
+  >;
+}
+
+export interface CandidateLocationCreateWithoutVisitInput {
+  id?: Maybe<ID_Input>;
+  latitudeE7?: Maybe<Int>;
+  longitudeE7?: Maybe<Int>;
+  placeId?: Maybe<String>;
+  locationConfidence?: Maybe<Float>;
+}
+
+export type DurationWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface DurationUpdateInput {
+  startTimestampMs?: Maybe<String>;
+  endTimestampMs?: Maybe<String>;
+  visit?: Maybe<VisitUpdateOneWithoutDurationInput>;
+}
+
+export interface VisitScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  placeConfidence?: Maybe<String>;
+  placeConfidence_not?: Maybe<String>;
+  placeConfidence_in?: Maybe<String[] | String>;
+  placeConfidence_not_in?: Maybe<String[] | String>;
+  placeConfidence_lt?: Maybe<String>;
+  placeConfidence_lte?: Maybe<String>;
+  placeConfidence_gt?: Maybe<String>;
+  placeConfidence_gte?: Maybe<String>;
+  placeConfidence_contains?: Maybe<String>;
+  placeConfidence_not_contains?: Maybe<String>;
+  placeConfidence_starts_with?: Maybe<String>;
+  placeConfidence_not_starts_with?: Maybe<String>;
+  placeConfidence_ends_with?: Maybe<String>;
+  placeConfidence_not_ends_with?: Maybe<String>;
+  centerLatE7?: Maybe<Int>;
+  centerLatE7_not?: Maybe<Int>;
+  centerLatE7_in?: Maybe<Int[] | Int>;
+  centerLatE7_not_in?: Maybe<Int[] | Int>;
+  centerLatE7_lt?: Maybe<Int>;
+  centerLatE7_lte?: Maybe<Int>;
+  centerLatE7_gt?: Maybe<Int>;
+  centerLatE7_gte?: Maybe<Int>;
+  centerLngE7?: Maybe<Int>;
+  centerLngE7_not?: Maybe<Int>;
+  centerLngE7_in?: Maybe<Int[] | Int>;
+  centerLngE7_not_in?: Maybe<Int[] | Int>;
+  centerLngE7_lt?: Maybe<Int>;
+  centerLngE7_lte?: Maybe<Int>;
+  centerLngE7_gt?: Maybe<Int>;
+  centerLngE7_gte?: Maybe<Int>;
+  visitConfidence?: Maybe<Float>;
+  visitConfidence_not?: Maybe<Float>;
+  visitConfidence_in?: Maybe<Float[] | Float>;
+  visitConfidence_not_in?: Maybe<Float[] | Float>;
+  visitConfidence_lt?: Maybe<Float>;
+  visitConfidence_lte?: Maybe<Float>;
+  visitConfidence_gt?: Maybe<Float>;
+  visitConfidence_gte?: Maybe<Float>;
+  AND?: Maybe<VisitScalarWhereInput[] | VisitScalarWhereInput>;
+  OR?: Maybe<VisitScalarWhereInput[] | VisitScalarWhereInput>;
+  NOT?: Maybe<VisitScalarWhereInput[] | VisitScalarWhereInput>;
+}
+
+export interface VisitUpdateOneWithoutDurationInput {
+  create?: Maybe<VisitCreateWithoutDurationInput>;
+  update?: Maybe<VisitUpdateWithoutDurationDataInput>;
+  upsert?: Maybe<VisitUpsertWithoutDurationInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<VisitWhereUniqueInput>;
+}
+
+export interface VisitUpdateWithWhereUniqueWithoutUserInput {
+  where: VisitWhereUniqueInput;
+  data: VisitUpdateWithoutUserDataInput;
+}
+
+export interface VisitUpdateWithoutDurationDataInput {
+  location?: Maybe<LocationUpdateOneWithoutVisitInput>;
+  placeConfidence?: Maybe<String>;
+  centerLatE7?: Maybe<Int>;
+  centerLngE7?: Maybe<Int>;
+  visitConfidence?: Maybe<Float>;
+  otherCandidateLocations?: Maybe<CandidateLocationUpdateManyWithoutVisitInput>;
+  user?: Maybe<UserUpdateOneWithoutVisitsInput>;
+}
+
+export interface VisitCreateWithoutUserInput {
+  id?: Maybe<ID_Input>;
+  location?: Maybe<LocationCreateOneWithoutVisitInput>;
+  duration?: Maybe<DurationCreateOneWithoutVisitInput>;
+  placeConfidence?: Maybe<String>;
+  centerLatE7?: Maybe<Int>;
+  centerLngE7?: Maybe<Int>;
+  visitConfidence?: Maybe<Float>;
+  otherCandidateLocations?: Maybe<CandidateLocationCreateManyWithoutVisitInput>;
+}
+
+export interface CandidateLocationUpdateManyWithoutVisitInput {
+  create?: Maybe<
+    | CandidateLocationCreateWithoutVisitInput[]
+    | CandidateLocationCreateWithoutVisitInput
+  >;
+  delete?: Maybe<
+    CandidateLocationWhereUniqueInput[] | CandidateLocationWhereUniqueInput
+  >;
+  connect?: Maybe<
+    CandidateLocationWhereUniqueInput[] | CandidateLocationWhereUniqueInput
+  >;
+  set?: Maybe<
+    CandidateLocationWhereUniqueInput[] | CandidateLocationWhereUniqueInput
+  >;
+  disconnect?: Maybe<
+    CandidateLocationWhereUniqueInput[] | CandidateLocationWhereUniqueInput
+  >;
+  update?: Maybe<
+    | CandidateLocationUpdateWithWhereUniqueWithoutVisitInput[]
+    | CandidateLocationUpdateWithWhereUniqueWithoutVisitInput
+  >;
+  upsert?: Maybe<
+    | CandidateLocationUpsertWithWhereUniqueWithoutVisitInput[]
+    | CandidateLocationUpsertWithWhereUniqueWithoutVisitInput
+  >;
+  deleteMany?: Maybe<
+    CandidateLocationScalarWhereInput[] | CandidateLocationScalarWhereInput
+  >;
+  updateMany?: Maybe<
+    | CandidateLocationUpdateManyWithWhereNestedInput[]
+    | CandidateLocationUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface LocationUpdateManyMutationInput {
+  latitudeE7?: Maybe<Int>;
+  longitudeE7?: Maybe<Int>;
+  placeId?: Maybe<String>;
+  address?: Maybe<String>;
+  name?: Maybe<String>;
+  sourceInfo?: Maybe<String>;
+}
+
+export interface CandidateLocationUpdateWithWhereUniqueWithoutVisitInput {
+  where: CandidateLocationWhereUniqueInput;
+  data: CandidateLocationUpdateWithoutVisitDataInput;
+}
+
+export interface VisitCreateOneWithoutOtherCandidateLocationsInput {
+  create?: Maybe<VisitCreateWithoutOtherCandidateLocationsInput>;
+  connect?: Maybe<VisitWhereUniqueInput>;
+}
+
+export interface CandidateLocationUpdateWithoutVisitDataInput {
+  latitudeE7?: Maybe<Int>;
+  longitudeE7?: Maybe<Int>;
+  placeId?: Maybe<String>;
+  locationConfidence?: Maybe<Float>;
+}
+
+export interface DurationCreateOneWithoutVisitInput {
+  create?: Maybe<DurationCreateWithoutVisitInput>;
+  connect?: Maybe<DurationWhereUniqueInput>;
+}
+
+export interface CandidateLocationUpsertWithWhereUniqueWithoutVisitInput {
+  where: CandidateLocationWhereUniqueInput;
+  update: CandidateLocationUpdateWithoutVisitDataInput;
+  create: CandidateLocationCreateWithoutVisitInput;
+}
+
+export interface LocationSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<LocationWhereInput>;
+  AND?: Maybe<
+    LocationSubscriptionWhereInput[] | LocationSubscriptionWhereInput
+  >;
+}
+
+export interface CandidateLocationScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  latitudeE7?: Maybe<Int>;
+  latitudeE7_not?: Maybe<Int>;
+  latitudeE7_in?: Maybe<Int[] | Int>;
+  latitudeE7_not_in?: Maybe<Int[] | Int>;
+  latitudeE7_lt?: Maybe<Int>;
+  latitudeE7_lte?: Maybe<Int>;
+  latitudeE7_gt?: Maybe<Int>;
+  latitudeE7_gte?: Maybe<Int>;
+  longitudeE7?: Maybe<Int>;
+  longitudeE7_not?: Maybe<Int>;
+  longitudeE7_in?: Maybe<Int[] | Int>;
+  longitudeE7_not_in?: Maybe<Int[] | Int>;
+  longitudeE7_lt?: Maybe<Int>;
+  longitudeE7_lte?: Maybe<Int>;
+  longitudeE7_gt?: Maybe<Int>;
+  longitudeE7_gte?: Maybe<Int>;
+  placeId?: Maybe<String>;
+  placeId_not?: Maybe<String>;
+  placeId_in?: Maybe<String[] | String>;
+  placeId_not_in?: Maybe<String[] | String>;
+  placeId_lt?: Maybe<String>;
+  placeId_lte?: Maybe<String>;
+  placeId_gt?: Maybe<String>;
+  placeId_gte?: Maybe<String>;
+  placeId_contains?: Maybe<String>;
+  placeId_not_contains?: Maybe<String>;
+  placeId_starts_with?: Maybe<String>;
+  placeId_not_starts_with?: Maybe<String>;
+  placeId_ends_with?: Maybe<String>;
+  placeId_not_ends_with?: Maybe<String>;
+  locationConfidence?: Maybe<Float>;
+  locationConfidence_not?: Maybe<Float>;
+  locationConfidence_in?: Maybe<Float[] | Float>;
+  locationConfidence_not_in?: Maybe<Float[] | Float>;
+  locationConfidence_lt?: Maybe<Float>;
+  locationConfidence_lte?: Maybe<Float>;
+  locationConfidence_gt?: Maybe<Float>;
+  locationConfidence_gte?: Maybe<Float>;
+  AND?: Maybe<
+    CandidateLocationScalarWhereInput[] | CandidateLocationScalarWhereInput
+  >;
+  OR?: Maybe<
+    CandidateLocationScalarWhereInput[] | CandidateLocationScalarWhereInput
+  >;
+  NOT?: Maybe<
+    CandidateLocationScalarWhereInput[] | CandidateLocationScalarWhereInput
+  >;
+}
+
+export interface VisitUpdateManyDataInput {
+  placeConfidence?: Maybe<String>;
+  centerLatE7?: Maybe<Int>;
+  centerLngE7?: Maybe<Int>;
+  visitConfidence?: Maybe<Float>;
+}
+
+export interface CandidateLocationUpdateManyWithWhereNestedInput {
+  where: CandidateLocationScalarWhereInput;
+  data: CandidateLocationUpdateManyDataInput;
+}
+
 export type UserWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
   email?: Maybe<String>;
 }>;
 
+export interface VisitUpdateWithoutLocationDataInput {
+  duration?: Maybe<DurationUpdateOneWithoutVisitInput>;
+  placeConfidence?: Maybe<String>;
+  centerLatE7?: Maybe<Int>;
+  centerLngE7?: Maybe<Int>;
+  visitConfidence?: Maybe<Float>;
+  otherCandidateLocations?: Maybe<CandidateLocationUpdateManyWithoutVisitInput>;
+  user?: Maybe<UserUpdateOneWithoutVisitsInput>;
+}
+
+export interface LocationCreateInput {
+  id?: Maybe<ID_Input>;
+  latitudeE7?: Maybe<Int>;
+  longitudeE7?: Maybe<Int>;
+  placeId?: Maybe<String>;
+  address?: Maybe<String>;
+  name?: Maybe<String>;
+  sourceInfo?: Maybe<String>;
+  visit?: Maybe<VisitCreateOneWithoutLocationInput>;
+}
+
+export interface DurationUpdateManyMutationInput {
+  startTimestampMs?: Maybe<String>;
+  endTimestampMs?: Maybe<String>;
+}
+
+export interface VisitUpsertWithoutDurationInput {
+  update: VisitUpdateWithoutDurationDataInput;
+  create: VisitCreateWithoutDurationInput;
+}
+
+export interface CandidateLocationUpdateManyDataInput {
+  latitudeE7?: Maybe<Int>;
+  longitudeE7?: Maybe<Int>;
+  placeId?: Maybe<String>;
+  locationConfidence?: Maybe<Float>;
+}
+
+export interface LocationCreateOneWithoutVisitInput {
+  create?: Maybe<LocationCreateWithoutVisitInput>;
+  connect?: Maybe<LocationWhereUniqueInput>;
+}
+
+export interface UserCreateInput {
+  id?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  email: String;
+  password: String;
+  visits?: Maybe<VisitCreateManyWithoutUserInput>;
+}
+
+export interface VisitUpsertWithWhereUniqueWithoutUserInput {
+  where: VisitWhereUniqueInput;
+  update: VisitUpdateWithoutUserDataInput;
+  create: VisitCreateWithoutUserInput;
+}
+
+export interface VisitUpdateInput {
+  location?: Maybe<LocationUpdateOneWithoutVisitInput>;
+  duration?: Maybe<DurationUpdateOneWithoutVisitInput>;
+  placeConfidence?: Maybe<String>;
+  centerLatE7?: Maybe<Int>;
+  centerLngE7?: Maybe<Int>;
+  visitConfidence?: Maybe<Float>;
+  otherCandidateLocations?: Maybe<CandidateLocationUpdateManyWithoutVisitInput>;
+  user?: Maybe<UserUpdateOneWithoutVisitsInput>;
+}
+
+export interface DurationWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  startTimestampMs?: Maybe<String>;
+  startTimestampMs_not?: Maybe<String>;
+  startTimestampMs_in?: Maybe<String[] | String>;
+  startTimestampMs_not_in?: Maybe<String[] | String>;
+  startTimestampMs_lt?: Maybe<String>;
+  startTimestampMs_lte?: Maybe<String>;
+  startTimestampMs_gt?: Maybe<String>;
+  startTimestampMs_gte?: Maybe<String>;
+  startTimestampMs_contains?: Maybe<String>;
+  startTimestampMs_not_contains?: Maybe<String>;
+  startTimestampMs_starts_with?: Maybe<String>;
+  startTimestampMs_not_starts_with?: Maybe<String>;
+  startTimestampMs_ends_with?: Maybe<String>;
+  startTimestampMs_not_ends_with?: Maybe<String>;
+  endTimestampMs?: Maybe<String>;
+  endTimestampMs_not?: Maybe<String>;
+  endTimestampMs_in?: Maybe<String[] | String>;
+  endTimestampMs_not_in?: Maybe<String[] | String>;
+  endTimestampMs_lt?: Maybe<String>;
+  endTimestampMs_lte?: Maybe<String>;
+  endTimestampMs_gt?: Maybe<String>;
+  endTimestampMs_gte?: Maybe<String>;
+  endTimestampMs_contains?: Maybe<String>;
+  endTimestampMs_not_contains?: Maybe<String>;
+  endTimestampMs_starts_with?: Maybe<String>;
+  endTimestampMs_not_starts_with?: Maybe<String>;
+  endTimestampMs_ends_with?: Maybe<String>;
+  endTimestampMs_not_ends_with?: Maybe<String>;
+  visit?: Maybe<VisitWhereInput>;
+  AND?: Maybe<DurationWhereInput[] | DurationWhereInput>;
+}
+
 export interface NodeNode {
   id: ID_Output;
-}
-
-export interface AggregateUser {
-  count: Int;
-}
-
-export interface AggregateUserPromise
-  extends Promise<AggregateUser>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateUserSubscription
-  extends Promise<AsyncIterator<AggregateUser>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface BatchPayload {
@@ -242,46 +1350,157 @@ export interface BatchPayloadSubscription
   count: () => Promise<AsyncIterator<Long>>;
 }
 
-export interface UserPreviousValues {
+export interface VisitPreviousValues {
+  id: ID_Output;
+  placeConfidence?: String;
+  centerLatE7?: Int;
+  centerLngE7?: Int;
+  visitConfidence?: Float;
+}
+
+export interface VisitPreviousValuesPromise
+  extends Promise<VisitPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  placeConfidence: () => Promise<String>;
+  centerLatE7: () => Promise<Int>;
+  centerLngE7: () => Promise<Int>;
+  visitConfidence: () => Promise<Float>;
+}
+
+export interface VisitPreviousValuesSubscription
+  extends Promise<AsyncIterator<VisitPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  placeConfidence: () => Promise<AsyncIterator<String>>;
+  centerLatE7: () => Promise<AsyncIterator<Int>>;
+  centerLngE7: () => Promise<AsyncIterator<Int>>;
+  visitConfidence: () => Promise<AsyncIterator<Float>>;
+}
+
+export interface CandidateLocationEdge {
+  node: CandidateLocation;
+  cursor: String;
+}
+
+export interface CandidateLocationEdgePromise
+  extends Promise<CandidateLocationEdge>,
+    Fragmentable {
+  node: <T = CandidateLocationPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface CandidateLocationEdgeSubscription
+  extends Promise<AsyncIterator<CandidateLocationEdge>>,
+    Fragmentable {
+  node: <T = CandidateLocationSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface Duration {
+  id: ID_Output;
+  startTimestampMs?: String;
+  endTimestampMs?: String;
+}
+
+export interface DurationPromise extends Promise<Duration>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  startTimestampMs: () => Promise<String>;
+  endTimestampMs: () => Promise<String>;
+  visit: <T = VisitPromise>() => T;
+}
+
+export interface DurationSubscription
+  extends Promise<AsyncIterator<Duration>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  startTimestampMs: () => Promise<AsyncIterator<String>>;
+  endTimestampMs: () => Promise<AsyncIterator<String>>;
+  visit: <T = VisitSubscription>() => T;
+}
+
+export interface DurationNullablePromise
+  extends Promise<Duration | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  startTimestampMs: () => Promise<String>;
+  endTimestampMs: () => Promise<String>;
+  visit: <T = VisitPromise>() => T;
+}
+
+export interface AggregateCandidateLocation {
+  count: Int;
+}
+
+export interface AggregateCandidateLocationPromise
+  extends Promise<AggregateCandidateLocation>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateCandidateLocationSubscription
+  extends Promise<AsyncIterator<AggregateCandidateLocation>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface User {
   id: ID_Output;
   name?: String;
   email: String;
   password: String;
 }
 
-export interface UserPreviousValuesPromise
-  extends Promise<UserPreviousValues>,
-    Fragmentable {
+export interface UserPromise extends Promise<User>, Fragmentable {
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
   email: () => Promise<String>;
   password: () => Promise<String>;
+  visits: <T = FragmentableArray<Visit>>(args?: {
+    where?: VisitWhereInput;
+    orderBy?: VisitOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
-export interface UserPreviousValuesSubscription
-  extends Promise<AsyncIterator<UserPreviousValues>>,
+export interface UserSubscription
+  extends Promise<AsyncIterator<User>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   name: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
+  visits: <T = Promise<AsyncIterator<VisitSubscription>>>(args?: {
+    where?: VisitWhereInput;
+    orderBy?: VisitOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
-export interface UserEdge {
-  node: User;
-  cursor: String;
-}
-
-export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
-  node: <T = UserPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface UserEdgeSubscription
-  extends Promise<AsyncIterator<UserEdge>>,
+export interface UserNullablePromise
+  extends Promise<User | null>,
     Fragmentable {
-  node: <T = UserSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  email: () => Promise<String>;
+  password: () => Promise<String>;
+  visits: <T = FragmentableArray<Visit>>(args?: {
+    where?: VisitWhereInput;
+    orderBy?: VisitOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface UserSubscriptionPayload {
@@ -309,57 +1528,53 @@ export interface UserSubscriptionPayloadSubscription
   previousValues: <T = UserPreviousValuesSubscription>() => T;
 }
 
-export interface User {
-  id: ID_Output;
-  name?: String;
-  email: String;
-  password: String;
+export interface AggregateVisit {
+  count: Int;
 }
 
-export interface UserPromise extends Promise<User>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  email: () => Promise<String>;
-  password: () => Promise<String>;
-}
-
-export interface UserSubscription
-  extends Promise<AsyncIterator<User>>,
+export interface AggregateVisitPromise
+  extends Promise<AggregateVisit>,
     Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  email: () => Promise<AsyncIterator<String>>;
-  password: () => Promise<AsyncIterator<String>>;
+  count: () => Promise<Int>;
 }
 
-export interface UserNullablePromise
-  extends Promise<User | null>,
+export interface AggregateVisitSubscription
+  extends Promise<AsyncIterator<AggregateVisit>>,
     Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  email: () => Promise<String>;
-  password: () => Promise<String>;
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface UserConnection {
-  pageInfo: PageInfo;
-  edges: UserEdge[];
+export interface VisitEdge {
+  node: Visit;
+  cursor: String;
 }
 
-export interface UserConnectionPromise
-  extends Promise<UserConnection>,
+export interface VisitEdgePromise extends Promise<VisitEdge>, Fragmentable {
+  node: <T = VisitPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface VisitEdgeSubscription
+  extends Promise<AsyncIterator<VisitEdge>>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<UserEdge>>() => T;
-  aggregate: <T = AggregateUserPromise>() => T;
+  node: <T = VisitSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface UserConnectionSubscription
-  extends Promise<AsyncIterator<UserConnection>>,
+export interface AggregateUser {
+  count: Int;
+}
+
+export interface AggregateUserPromise
+  extends Promise<AggregateUser>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateUserSubscription>() => T;
+  count: () => Promise<Int>;
+}
+
+export interface AggregateUserSubscription
+  extends Promise<AsyncIterator<AggregateUser>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface PageInfo {
@@ -385,18 +1600,575 @@ export interface PageInfoSubscription
   endCursor: () => Promise<AsyncIterator<String>>;
 }
 
+export interface UserConnection {
+  pageInfo: PageInfo;
+  edges: UserEdge[];
+}
+
+export interface UserConnectionPromise
+  extends Promise<UserConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<UserEdge>>() => T;
+  aggregate: <T = AggregateUserPromise>() => T;
+}
+
+export interface UserConnectionSubscription
+  extends Promise<AsyncIterator<UserConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateUserSubscription>() => T;
+}
+
+export interface CandidateLocation {
+  id: ID_Output;
+  latitudeE7?: Int;
+  longitudeE7?: Int;
+  placeId?: String;
+  locationConfidence?: Float;
+}
+
+export interface CandidateLocationPromise
+  extends Promise<CandidateLocation>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  latitudeE7: () => Promise<Int>;
+  longitudeE7: () => Promise<Int>;
+  placeId: () => Promise<String>;
+  locationConfidence: () => Promise<Float>;
+  visit: <T = VisitPromise>() => T;
+}
+
+export interface CandidateLocationSubscription
+  extends Promise<AsyncIterator<CandidateLocation>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  latitudeE7: () => Promise<AsyncIterator<Int>>;
+  longitudeE7: () => Promise<AsyncIterator<Int>>;
+  placeId: () => Promise<AsyncIterator<String>>;
+  locationConfidence: () => Promise<AsyncIterator<Float>>;
+  visit: <T = VisitSubscription>() => T;
+}
+
+export interface CandidateLocationNullablePromise
+  extends Promise<CandidateLocation | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  latitudeE7: () => Promise<Int>;
+  longitudeE7: () => Promise<Int>;
+  placeId: () => Promise<String>;
+  locationConfidence: () => Promise<Float>;
+  visit: <T = VisitPromise>() => T;
+}
+
+export interface AggregateLocation {
+  count: Int;
+}
+
+export interface AggregateLocationPromise
+  extends Promise<AggregateLocation>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateLocationSubscription
+  extends Promise<AsyncIterator<AggregateLocation>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface CandidateLocationSubscriptionPayload {
+  mutation: MutationType;
+  node: CandidateLocation;
+  updatedFields: String[];
+  previousValues: CandidateLocationPreviousValues;
+}
+
+export interface CandidateLocationSubscriptionPayloadPromise
+  extends Promise<CandidateLocationSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = CandidateLocationPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = CandidateLocationPreviousValuesPromise>() => T;
+}
+
+export interface CandidateLocationSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<CandidateLocationSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = CandidateLocationSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = CandidateLocationPreviousValuesSubscription>() => T;
+}
+
+export interface LocationConnection {
+  pageInfo: PageInfo;
+  edges: LocationEdge[];
+}
+
+export interface LocationConnectionPromise
+  extends Promise<LocationConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<LocationEdge>>() => T;
+  aggregate: <T = AggregateLocationPromise>() => T;
+}
+
+export interface LocationConnectionSubscription
+  extends Promise<AsyncIterator<LocationConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<LocationEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateLocationSubscription>() => T;
+}
+
+export interface CandidateLocationPreviousValues {
+  id: ID_Output;
+  latitudeE7?: Int;
+  longitudeE7?: Int;
+  placeId?: String;
+  locationConfidence?: Float;
+}
+
+export interface CandidateLocationPreviousValuesPromise
+  extends Promise<CandidateLocationPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  latitudeE7: () => Promise<Int>;
+  longitudeE7: () => Promise<Int>;
+  placeId: () => Promise<String>;
+  locationConfidence: () => Promise<Float>;
+}
+
+export interface CandidateLocationPreviousValuesSubscription
+  extends Promise<AsyncIterator<CandidateLocationPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  latitudeE7: () => Promise<AsyncIterator<Int>>;
+  longitudeE7: () => Promise<AsyncIterator<Int>>;
+  placeId: () => Promise<AsyncIterator<String>>;
+  locationConfidence: () => Promise<AsyncIterator<Float>>;
+}
+
+export interface AggregateDuration {
+  count: Int;
+}
+
+export interface AggregateDurationPromise
+  extends Promise<AggregateDuration>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateDurationSubscription
+  extends Promise<AsyncIterator<AggregateDuration>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface CandidateLocationConnection {
+  pageInfo: PageInfo;
+  edges: CandidateLocationEdge[];
+}
+
+export interface CandidateLocationConnectionPromise
+  extends Promise<CandidateLocationConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<CandidateLocationEdge>>() => T;
+  aggregate: <T = AggregateCandidateLocationPromise>() => T;
+}
+
+export interface CandidateLocationConnectionSubscription
+  extends Promise<AsyncIterator<CandidateLocationConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<CandidateLocationEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateCandidateLocationSubscription>() => T;
+}
+
+export interface DurationConnection {
+  pageInfo: PageInfo;
+  edges: DurationEdge[];
+}
+
+export interface DurationConnectionPromise
+  extends Promise<DurationConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<DurationEdge>>() => T;
+  aggregate: <T = AggregateDurationPromise>() => T;
+}
+
+export interface DurationConnectionSubscription
+  extends Promise<AsyncIterator<DurationConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<DurationEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateDurationSubscription>() => T;
+}
+
+export interface DurationSubscriptionPayload {
+  mutation: MutationType;
+  node: Duration;
+  updatedFields: String[];
+  previousValues: DurationPreviousValues;
+}
+
+export interface DurationSubscriptionPayloadPromise
+  extends Promise<DurationSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = DurationPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = DurationPreviousValuesPromise>() => T;
+}
+
+export interface DurationSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<DurationSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = DurationSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = DurationPreviousValuesSubscription>() => T;
+}
+
+export interface VisitConnection {
+  pageInfo: PageInfo;
+  edges: VisitEdge[];
+}
+
+export interface VisitConnectionPromise
+  extends Promise<VisitConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<VisitEdge>>() => T;
+  aggregate: <T = AggregateVisitPromise>() => T;
+}
+
+export interface VisitConnectionSubscription
+  extends Promise<AsyncIterator<VisitConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<VisitEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateVisitSubscription>() => T;
+}
+
+export interface VisitSubscriptionPayload {
+  mutation: MutationType;
+  node: Visit;
+  updatedFields: String[];
+  previousValues: VisitPreviousValues;
+}
+
+export interface VisitSubscriptionPayloadPromise
+  extends Promise<VisitSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = VisitPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = VisitPreviousValuesPromise>() => T;
+}
+
+export interface VisitSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<VisitSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = VisitSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = VisitPreviousValuesSubscription>() => T;
+}
+
+export interface LocationPreviousValues {
+  id: ID_Output;
+  latitudeE7?: Int;
+  longitudeE7?: Int;
+  placeId?: String;
+  address?: String;
+  name?: String;
+  sourceInfo?: String;
+}
+
+export interface LocationPreviousValuesPromise
+  extends Promise<LocationPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  latitudeE7: () => Promise<Int>;
+  longitudeE7: () => Promise<Int>;
+  placeId: () => Promise<String>;
+  address: () => Promise<String>;
+  name: () => Promise<String>;
+  sourceInfo: () => Promise<String>;
+}
+
+export interface LocationPreviousValuesSubscription
+  extends Promise<AsyncIterator<LocationPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  latitudeE7: () => Promise<AsyncIterator<Int>>;
+  longitudeE7: () => Promise<AsyncIterator<Int>>;
+  placeId: () => Promise<AsyncIterator<String>>;
+  address: () => Promise<AsyncIterator<String>>;
+  name: () => Promise<AsyncIterator<String>>;
+  sourceInfo: () => Promise<AsyncIterator<String>>;
+}
+
+export interface LocationSubscriptionPayload {
+  mutation: MutationType;
+  node: Location;
+  updatedFields: String[];
+  previousValues: LocationPreviousValues;
+}
+
+export interface LocationSubscriptionPayloadPromise
+  extends Promise<LocationSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = LocationPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = LocationPreviousValuesPromise>() => T;
+}
+
+export interface LocationSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<LocationSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = LocationSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = LocationPreviousValuesSubscription>() => T;
+}
+
+export interface Visit {
+  id: ID_Output;
+  placeConfidence?: String;
+  centerLatE7?: Int;
+  centerLngE7?: Int;
+  visitConfidence?: Float;
+}
+
+export interface VisitPromise extends Promise<Visit>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  location: <T = LocationPromise>() => T;
+  duration: <T = DurationPromise>() => T;
+  placeConfidence: () => Promise<String>;
+  centerLatE7: () => Promise<Int>;
+  centerLngE7: () => Promise<Int>;
+  visitConfidence: () => Promise<Float>;
+  otherCandidateLocations: <T = FragmentableArray<CandidateLocation>>(args?: {
+    where?: CandidateLocationWhereInput;
+    orderBy?: CandidateLocationOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  user: <T = UserPromise>() => T;
+}
+
+export interface VisitSubscription
+  extends Promise<AsyncIterator<Visit>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  location: <T = LocationSubscription>() => T;
+  duration: <T = DurationSubscription>() => T;
+  placeConfidence: () => Promise<AsyncIterator<String>>;
+  centerLatE7: () => Promise<AsyncIterator<Int>>;
+  centerLngE7: () => Promise<AsyncIterator<Int>>;
+  visitConfidence: () => Promise<AsyncIterator<Float>>;
+  otherCandidateLocations: <
+    T = Promise<AsyncIterator<CandidateLocationSubscription>>
+  >(args?: {
+    where?: CandidateLocationWhereInput;
+    orderBy?: CandidateLocationOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  user: <T = UserSubscription>() => T;
+}
+
+export interface VisitNullablePromise
+  extends Promise<Visit | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  location: <T = LocationPromise>() => T;
+  duration: <T = DurationPromise>() => T;
+  placeConfidence: () => Promise<String>;
+  centerLatE7: () => Promise<Int>;
+  centerLngE7: () => Promise<Int>;
+  visitConfidence: () => Promise<Float>;
+  otherCandidateLocations: <T = FragmentableArray<CandidateLocation>>(args?: {
+    where?: CandidateLocationWhereInput;
+    orderBy?: CandidateLocationOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  user: <T = UserPromise>() => T;
+}
+
+export interface DurationPreviousValues {
+  id: ID_Output;
+  startTimestampMs?: String;
+  endTimestampMs?: String;
+}
+
+export interface DurationPreviousValuesPromise
+  extends Promise<DurationPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  startTimestampMs: () => Promise<String>;
+  endTimestampMs: () => Promise<String>;
+}
+
+export interface DurationPreviousValuesSubscription
+  extends Promise<AsyncIterator<DurationPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  startTimestampMs: () => Promise<AsyncIterator<String>>;
+  endTimestampMs: () => Promise<AsyncIterator<String>>;
+}
+
+export interface LocationEdge {
+  node: Location;
+  cursor: String;
+}
+
+export interface LocationEdgePromise
+  extends Promise<LocationEdge>,
+    Fragmentable {
+  node: <T = LocationPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface LocationEdgeSubscription
+  extends Promise<AsyncIterator<LocationEdge>>,
+    Fragmentable {
+  node: <T = LocationSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface UserEdge {
+  node: User;
+  cursor: String;
+}
+
+export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
+  node: <T = UserPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface UserEdgeSubscription
+  extends Promise<AsyncIterator<UserEdge>>,
+    Fragmentable {
+  node: <T = UserSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface UserPreviousValues {
+  id: ID_Output;
+  name?: String;
+  email: String;
+  password: String;
+}
+
+export interface UserPreviousValuesPromise
+  extends Promise<UserPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  email: () => Promise<String>;
+  password: () => Promise<String>;
+}
+
+export interface UserPreviousValuesSubscription
+  extends Promise<AsyncIterator<UserPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  password: () => Promise<AsyncIterator<String>>;
+}
+
+export interface DurationEdge {
+  node: Duration;
+  cursor: String;
+}
+
+export interface DurationEdgePromise
+  extends Promise<DurationEdge>,
+    Fragmentable {
+  node: <T = DurationPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface DurationEdgeSubscription
+  extends Promise<AsyncIterator<DurationEdge>>,
+    Fragmentable {
+  node: <T = DurationSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface Location {
+  id: ID_Output;
+  latitudeE7?: Int;
+  longitudeE7?: Int;
+  placeId?: String;
+  address?: String;
+  name?: String;
+  sourceInfo?: String;
+}
+
+export interface LocationPromise extends Promise<Location>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  latitudeE7: () => Promise<Int>;
+  longitudeE7: () => Promise<Int>;
+  placeId: () => Promise<String>;
+  address: () => Promise<String>;
+  name: () => Promise<String>;
+  sourceInfo: () => Promise<String>;
+  visit: <T = VisitPromise>() => T;
+}
+
+export interface LocationSubscription
+  extends Promise<AsyncIterator<Location>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  latitudeE7: () => Promise<AsyncIterator<Int>>;
+  longitudeE7: () => Promise<AsyncIterator<Int>>;
+  placeId: () => Promise<AsyncIterator<String>>;
+  address: () => Promise<AsyncIterator<String>>;
+  name: () => Promise<AsyncIterator<String>>;
+  sourceInfo: () => Promise<AsyncIterator<String>>;
+  visit: <T = VisitSubscription>() => T;
+}
+
+export interface LocationNullablePromise
+  extends Promise<Location | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  latitudeE7: () => Promise<Int>;
+  longitudeE7: () => Promise<Int>;
+  placeId: () => Promise<String>;
+  address: () => Promise<String>;
+  name: () => Promise<String>;
+  sourceInfo: () => Promise<String>;
+  visit: <T = VisitPromise>() => T;
+}
+
 /*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+The `Boolean` scalar type represents `true` or `false`.
 */
-export type String = string;
+export type Boolean = boolean;
 
 export type Long = string;
-
-/*
-The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
-*/
-export type ID_Input = string | number;
-export type ID_Output = string;
 
 /*
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
@@ -404,9 +2176,20 @@ The `Int` scalar type represents non-fractional signed whole numeric values. Int
 export type Int = number;
 
 /*
-The `Boolean` scalar type represents `true` or `false`.
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
 */
-export type Boolean = boolean;
+export type String = string;
+
+/*
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
+*/
+export type Float = number;
+
+/*
+The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
+*/
+export type ID_Input = string | number;
+export type ID_Output = string;
 
 /**
  * Model Metadata
@@ -415,6 +2198,22 @@ export type Boolean = boolean;
 export const models: Model[] = [
   {
     name: "User",
+    embedded: false
+  },
+  {
+    name: "Visit",
+    embedded: false
+  },
+  {
+    name: "Location",
+    embedded: false
+  },
+  {
+    name: "Duration",
+    embedded: false
+  },
+  {
+    name: "CandidateLocation",
     embedded: false
   }
 ];

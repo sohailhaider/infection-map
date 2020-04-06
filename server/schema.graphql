@@ -14,9 +14,47 @@ type User {
     name: String
     email: String!
     password: String!
+    visits: [Visit!]
 }
 
 type AuthPayload {
   token: String
   user: User
+}
+
+type Visit {
+    id: ID!
+    location: Location
+    duration: Duration
+    placeConfidence: String
+    centerLatE7: Int
+    centerLngE7: Int
+    visitConfidence: Float
+    otherCandidateLocations: [CandidateLocation!]
+}
+
+type Location {
+    id: ID!
+    latitudeE7: Int
+    longitudeE7: Int
+    placeId: String
+    address: String
+    name: String
+    sourceInfo: String
+    visit: Visit
+}
+
+type Duration {
+    id: ID!
+    startTimestampMs: String
+    endTimestampMs: String
+    visit: Visit
+}
+
+type CandidateLocation {
+    id: ID!
+    latitudeE7: Int
+    longitudeE7: Int
+    placeId: String
+    locationConfidence: Float
 }

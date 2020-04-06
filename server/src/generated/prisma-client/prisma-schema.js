@@ -3,7 +3,23 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateUser {
+/* GraphQL */ `type AggregateCandidateLocation {
+  count: Int!
+}
+
+type AggregateDuration {
+  count: Int!
+}
+
+type AggregateLocation {
+  count: Int!
+}
+
+type AggregateUser {
+  count: Int!
+}
+
+type AggregateVisit {
   count: Int!
 }
 
@@ -11,15 +27,670 @@ type BatchPayload {
   count: Long!
 }
 
+type CandidateLocation {
+  id: ID!
+  latitudeE7: Int
+  longitudeE7: Int
+  placeId: String
+  locationConfidence: Float
+  visit: Visit
+}
+
+type CandidateLocationConnection {
+  pageInfo: PageInfo!
+  edges: [CandidateLocationEdge]!
+  aggregate: AggregateCandidateLocation!
+}
+
+input CandidateLocationCreateInput {
+  id: ID
+  latitudeE7: Int
+  longitudeE7: Int
+  placeId: String
+  locationConfidence: Float
+  visit: VisitCreateOneWithoutOtherCandidateLocationsInput
+}
+
+input CandidateLocationCreateManyWithoutVisitInput {
+  create: [CandidateLocationCreateWithoutVisitInput!]
+  connect: [CandidateLocationWhereUniqueInput!]
+}
+
+input CandidateLocationCreateWithoutVisitInput {
+  id: ID
+  latitudeE7: Int
+  longitudeE7: Int
+  placeId: String
+  locationConfidence: Float
+}
+
+type CandidateLocationEdge {
+  node: CandidateLocation!
+  cursor: String!
+}
+
+enum CandidateLocationOrderByInput {
+  id_ASC
+  id_DESC
+  latitudeE7_ASC
+  latitudeE7_DESC
+  longitudeE7_ASC
+  longitudeE7_DESC
+  placeId_ASC
+  placeId_DESC
+  locationConfidence_ASC
+  locationConfidence_DESC
+}
+
+type CandidateLocationPreviousValues {
+  id: ID!
+  latitudeE7: Int
+  longitudeE7: Int
+  placeId: String
+  locationConfidence: Float
+}
+
+input CandidateLocationScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  latitudeE7: Int
+  latitudeE7_not: Int
+  latitudeE7_in: [Int!]
+  latitudeE7_not_in: [Int!]
+  latitudeE7_lt: Int
+  latitudeE7_lte: Int
+  latitudeE7_gt: Int
+  latitudeE7_gte: Int
+  longitudeE7: Int
+  longitudeE7_not: Int
+  longitudeE7_in: [Int!]
+  longitudeE7_not_in: [Int!]
+  longitudeE7_lt: Int
+  longitudeE7_lte: Int
+  longitudeE7_gt: Int
+  longitudeE7_gte: Int
+  placeId: String
+  placeId_not: String
+  placeId_in: [String!]
+  placeId_not_in: [String!]
+  placeId_lt: String
+  placeId_lte: String
+  placeId_gt: String
+  placeId_gte: String
+  placeId_contains: String
+  placeId_not_contains: String
+  placeId_starts_with: String
+  placeId_not_starts_with: String
+  placeId_ends_with: String
+  placeId_not_ends_with: String
+  locationConfidence: Float
+  locationConfidence_not: Float
+  locationConfidence_in: [Float!]
+  locationConfidence_not_in: [Float!]
+  locationConfidence_lt: Float
+  locationConfidence_lte: Float
+  locationConfidence_gt: Float
+  locationConfidence_gte: Float
+  AND: [CandidateLocationScalarWhereInput!]
+  OR: [CandidateLocationScalarWhereInput!]
+  NOT: [CandidateLocationScalarWhereInput!]
+}
+
+type CandidateLocationSubscriptionPayload {
+  mutation: MutationType!
+  node: CandidateLocation
+  updatedFields: [String!]
+  previousValues: CandidateLocationPreviousValues
+}
+
+input CandidateLocationSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: CandidateLocationWhereInput
+  AND: [CandidateLocationSubscriptionWhereInput!]
+}
+
+input CandidateLocationUpdateInput {
+  latitudeE7: Int
+  longitudeE7: Int
+  placeId: String
+  locationConfidence: Float
+  visit: VisitUpdateOneWithoutOtherCandidateLocationsInput
+}
+
+input CandidateLocationUpdateManyDataInput {
+  latitudeE7: Int
+  longitudeE7: Int
+  placeId: String
+  locationConfidence: Float
+}
+
+input CandidateLocationUpdateManyMutationInput {
+  latitudeE7: Int
+  longitudeE7: Int
+  placeId: String
+  locationConfidence: Float
+}
+
+input CandidateLocationUpdateManyWithoutVisitInput {
+  create: [CandidateLocationCreateWithoutVisitInput!]
+  delete: [CandidateLocationWhereUniqueInput!]
+  connect: [CandidateLocationWhereUniqueInput!]
+  set: [CandidateLocationWhereUniqueInput!]
+  disconnect: [CandidateLocationWhereUniqueInput!]
+  update: [CandidateLocationUpdateWithWhereUniqueWithoutVisitInput!]
+  upsert: [CandidateLocationUpsertWithWhereUniqueWithoutVisitInput!]
+  deleteMany: [CandidateLocationScalarWhereInput!]
+  updateMany: [CandidateLocationUpdateManyWithWhereNestedInput!]
+}
+
+input CandidateLocationUpdateManyWithWhereNestedInput {
+  where: CandidateLocationScalarWhereInput!
+  data: CandidateLocationUpdateManyDataInput!
+}
+
+input CandidateLocationUpdateWithoutVisitDataInput {
+  latitudeE7: Int
+  longitudeE7: Int
+  placeId: String
+  locationConfidence: Float
+}
+
+input CandidateLocationUpdateWithWhereUniqueWithoutVisitInput {
+  where: CandidateLocationWhereUniqueInput!
+  data: CandidateLocationUpdateWithoutVisitDataInput!
+}
+
+input CandidateLocationUpsertWithWhereUniqueWithoutVisitInput {
+  where: CandidateLocationWhereUniqueInput!
+  update: CandidateLocationUpdateWithoutVisitDataInput!
+  create: CandidateLocationCreateWithoutVisitInput!
+}
+
+input CandidateLocationWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  latitudeE7: Int
+  latitudeE7_not: Int
+  latitudeE7_in: [Int!]
+  latitudeE7_not_in: [Int!]
+  latitudeE7_lt: Int
+  latitudeE7_lte: Int
+  latitudeE7_gt: Int
+  latitudeE7_gte: Int
+  longitudeE7: Int
+  longitudeE7_not: Int
+  longitudeE7_in: [Int!]
+  longitudeE7_not_in: [Int!]
+  longitudeE7_lt: Int
+  longitudeE7_lte: Int
+  longitudeE7_gt: Int
+  longitudeE7_gte: Int
+  placeId: String
+  placeId_not: String
+  placeId_in: [String!]
+  placeId_not_in: [String!]
+  placeId_lt: String
+  placeId_lte: String
+  placeId_gt: String
+  placeId_gte: String
+  placeId_contains: String
+  placeId_not_contains: String
+  placeId_starts_with: String
+  placeId_not_starts_with: String
+  placeId_ends_with: String
+  placeId_not_ends_with: String
+  locationConfidence: Float
+  locationConfidence_not: Float
+  locationConfidence_in: [Float!]
+  locationConfidence_not_in: [Float!]
+  locationConfidence_lt: Float
+  locationConfidence_lte: Float
+  locationConfidence_gt: Float
+  locationConfidence_gte: Float
+  visit: VisitWhereInput
+  AND: [CandidateLocationWhereInput!]
+}
+
+input CandidateLocationWhereUniqueInput {
+  id: ID
+}
+
+type Duration {
+  id: ID!
+  startTimestampMs: String
+  endTimestampMs: String
+  visit: Visit
+}
+
+type DurationConnection {
+  pageInfo: PageInfo!
+  edges: [DurationEdge]!
+  aggregate: AggregateDuration!
+}
+
+input DurationCreateInput {
+  id: ID
+  startTimestampMs: String
+  endTimestampMs: String
+  visit: VisitCreateOneWithoutDurationInput
+}
+
+input DurationCreateOneWithoutVisitInput {
+  create: DurationCreateWithoutVisitInput
+  connect: DurationWhereUniqueInput
+}
+
+input DurationCreateWithoutVisitInput {
+  id: ID
+  startTimestampMs: String
+  endTimestampMs: String
+}
+
+type DurationEdge {
+  node: Duration!
+  cursor: String!
+}
+
+enum DurationOrderByInput {
+  id_ASC
+  id_DESC
+  startTimestampMs_ASC
+  startTimestampMs_DESC
+  endTimestampMs_ASC
+  endTimestampMs_DESC
+}
+
+type DurationPreviousValues {
+  id: ID!
+  startTimestampMs: String
+  endTimestampMs: String
+}
+
+type DurationSubscriptionPayload {
+  mutation: MutationType!
+  node: Duration
+  updatedFields: [String!]
+  previousValues: DurationPreviousValues
+}
+
+input DurationSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: DurationWhereInput
+  AND: [DurationSubscriptionWhereInput!]
+}
+
+input DurationUpdateInput {
+  startTimestampMs: String
+  endTimestampMs: String
+  visit: VisitUpdateOneWithoutDurationInput
+}
+
+input DurationUpdateManyMutationInput {
+  startTimestampMs: String
+  endTimestampMs: String
+}
+
+input DurationUpdateOneWithoutVisitInput {
+  create: DurationCreateWithoutVisitInput
+  update: DurationUpdateWithoutVisitDataInput
+  upsert: DurationUpsertWithoutVisitInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: DurationWhereUniqueInput
+}
+
+input DurationUpdateWithoutVisitDataInput {
+  startTimestampMs: String
+  endTimestampMs: String
+}
+
+input DurationUpsertWithoutVisitInput {
+  update: DurationUpdateWithoutVisitDataInput!
+  create: DurationCreateWithoutVisitInput!
+}
+
+input DurationWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  startTimestampMs: String
+  startTimestampMs_not: String
+  startTimestampMs_in: [String!]
+  startTimestampMs_not_in: [String!]
+  startTimestampMs_lt: String
+  startTimestampMs_lte: String
+  startTimestampMs_gt: String
+  startTimestampMs_gte: String
+  startTimestampMs_contains: String
+  startTimestampMs_not_contains: String
+  startTimestampMs_starts_with: String
+  startTimestampMs_not_starts_with: String
+  startTimestampMs_ends_with: String
+  startTimestampMs_not_ends_with: String
+  endTimestampMs: String
+  endTimestampMs_not: String
+  endTimestampMs_in: [String!]
+  endTimestampMs_not_in: [String!]
+  endTimestampMs_lt: String
+  endTimestampMs_lte: String
+  endTimestampMs_gt: String
+  endTimestampMs_gte: String
+  endTimestampMs_contains: String
+  endTimestampMs_not_contains: String
+  endTimestampMs_starts_with: String
+  endTimestampMs_not_starts_with: String
+  endTimestampMs_ends_with: String
+  endTimestampMs_not_ends_with: String
+  visit: VisitWhereInput
+  AND: [DurationWhereInput!]
+}
+
+input DurationWhereUniqueInput {
+  id: ID
+}
+
+type Location {
+  id: ID!
+  latitudeE7: Int
+  longitudeE7: Int
+  placeId: String
+  address: String
+  name: String
+  sourceInfo: String
+  visit: Visit
+}
+
+type LocationConnection {
+  pageInfo: PageInfo!
+  edges: [LocationEdge]!
+  aggregate: AggregateLocation!
+}
+
+input LocationCreateInput {
+  id: ID
+  latitudeE7: Int
+  longitudeE7: Int
+  placeId: String
+  address: String
+  name: String
+  sourceInfo: String
+  visit: VisitCreateOneWithoutLocationInput
+}
+
+input LocationCreateOneWithoutVisitInput {
+  create: LocationCreateWithoutVisitInput
+  connect: LocationWhereUniqueInput
+}
+
+input LocationCreateWithoutVisitInput {
+  id: ID
+  latitudeE7: Int
+  longitudeE7: Int
+  placeId: String
+  address: String
+  name: String
+  sourceInfo: String
+}
+
+type LocationEdge {
+  node: Location!
+  cursor: String!
+}
+
+enum LocationOrderByInput {
+  id_ASC
+  id_DESC
+  latitudeE7_ASC
+  latitudeE7_DESC
+  longitudeE7_ASC
+  longitudeE7_DESC
+  placeId_ASC
+  placeId_DESC
+  address_ASC
+  address_DESC
+  name_ASC
+  name_DESC
+  sourceInfo_ASC
+  sourceInfo_DESC
+}
+
+type LocationPreviousValues {
+  id: ID!
+  latitudeE7: Int
+  longitudeE7: Int
+  placeId: String
+  address: String
+  name: String
+  sourceInfo: String
+}
+
+type LocationSubscriptionPayload {
+  mutation: MutationType!
+  node: Location
+  updatedFields: [String!]
+  previousValues: LocationPreviousValues
+}
+
+input LocationSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: LocationWhereInput
+  AND: [LocationSubscriptionWhereInput!]
+}
+
+input LocationUpdateInput {
+  latitudeE7: Int
+  longitudeE7: Int
+  placeId: String
+  address: String
+  name: String
+  sourceInfo: String
+  visit: VisitUpdateOneWithoutLocationInput
+}
+
+input LocationUpdateManyMutationInput {
+  latitudeE7: Int
+  longitudeE7: Int
+  placeId: String
+  address: String
+  name: String
+  sourceInfo: String
+}
+
+input LocationUpdateOneWithoutVisitInput {
+  create: LocationCreateWithoutVisitInput
+  update: LocationUpdateWithoutVisitDataInput
+  upsert: LocationUpsertWithoutVisitInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: LocationWhereUniqueInput
+}
+
+input LocationUpdateWithoutVisitDataInput {
+  latitudeE7: Int
+  longitudeE7: Int
+  placeId: String
+  address: String
+  name: String
+  sourceInfo: String
+}
+
+input LocationUpsertWithoutVisitInput {
+  update: LocationUpdateWithoutVisitDataInput!
+  create: LocationCreateWithoutVisitInput!
+}
+
+input LocationWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  latitudeE7: Int
+  latitudeE7_not: Int
+  latitudeE7_in: [Int!]
+  latitudeE7_not_in: [Int!]
+  latitudeE7_lt: Int
+  latitudeE7_lte: Int
+  latitudeE7_gt: Int
+  latitudeE7_gte: Int
+  longitudeE7: Int
+  longitudeE7_not: Int
+  longitudeE7_in: [Int!]
+  longitudeE7_not_in: [Int!]
+  longitudeE7_lt: Int
+  longitudeE7_lte: Int
+  longitudeE7_gt: Int
+  longitudeE7_gte: Int
+  placeId: String
+  placeId_not: String
+  placeId_in: [String!]
+  placeId_not_in: [String!]
+  placeId_lt: String
+  placeId_lte: String
+  placeId_gt: String
+  placeId_gte: String
+  placeId_contains: String
+  placeId_not_contains: String
+  placeId_starts_with: String
+  placeId_not_starts_with: String
+  placeId_ends_with: String
+  placeId_not_ends_with: String
+  address: String
+  address_not: String
+  address_in: [String!]
+  address_not_in: [String!]
+  address_lt: String
+  address_lte: String
+  address_gt: String
+  address_gte: String
+  address_contains: String
+  address_not_contains: String
+  address_starts_with: String
+  address_not_starts_with: String
+  address_ends_with: String
+  address_not_ends_with: String
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  sourceInfo: String
+  sourceInfo_not: String
+  sourceInfo_in: [String!]
+  sourceInfo_not_in: [String!]
+  sourceInfo_lt: String
+  sourceInfo_lte: String
+  sourceInfo_gt: String
+  sourceInfo_gte: String
+  sourceInfo_contains: String
+  sourceInfo_not_contains: String
+  sourceInfo_starts_with: String
+  sourceInfo_not_starts_with: String
+  sourceInfo_ends_with: String
+  sourceInfo_not_ends_with: String
+  visit: VisitWhereInput
+  AND: [LocationWhereInput!]
+}
+
+input LocationWhereUniqueInput {
+  id: ID
+}
+
 scalar Long
 
 type Mutation {
+  createCandidateLocation(data: CandidateLocationCreateInput!): CandidateLocation!
+  updateCandidateLocation(data: CandidateLocationUpdateInput!, where: CandidateLocationWhereUniqueInput!): CandidateLocation
+  updateManyCandidateLocations(data: CandidateLocationUpdateManyMutationInput!, where: CandidateLocationWhereInput): BatchPayload!
+  upsertCandidateLocation(where: CandidateLocationWhereUniqueInput!, create: CandidateLocationCreateInput!, update: CandidateLocationUpdateInput!): CandidateLocation!
+  deleteCandidateLocation(where: CandidateLocationWhereUniqueInput!): CandidateLocation
+  deleteManyCandidateLocations(where: CandidateLocationWhereInput): BatchPayload!
+  createDuration(data: DurationCreateInput!): Duration!
+  updateDuration(data: DurationUpdateInput!, where: DurationWhereUniqueInput!): Duration
+  updateManyDurations(data: DurationUpdateManyMutationInput!, where: DurationWhereInput): BatchPayload!
+  upsertDuration(where: DurationWhereUniqueInput!, create: DurationCreateInput!, update: DurationUpdateInput!): Duration!
+  deleteDuration(where: DurationWhereUniqueInput!): Duration
+  deleteManyDurations(where: DurationWhereInput): BatchPayload!
+  createLocation(data: LocationCreateInput!): Location!
+  updateLocation(data: LocationUpdateInput!, where: LocationWhereUniqueInput!): Location
+  updateManyLocations(data: LocationUpdateManyMutationInput!, where: LocationWhereInput): BatchPayload!
+  upsertLocation(where: LocationWhereUniqueInput!, create: LocationCreateInput!, update: LocationUpdateInput!): Location!
+  deleteLocation(where: LocationWhereUniqueInput!): Location
+  deleteManyLocations(where: LocationWhereInput): BatchPayload!
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   deleteUser(where: UserWhereUniqueInput!): User
   deleteManyUsers(where: UserWhereInput): BatchPayload!
+  createVisit(data: VisitCreateInput!): Visit!
+  updateVisit(data: VisitUpdateInput!, where: VisitWhereUniqueInput!): Visit
+  updateManyVisits(data: VisitUpdateManyMutationInput!, where: VisitWhereInput): BatchPayload!
+  upsertVisit(where: VisitWhereUniqueInput!, create: VisitCreateInput!, update: VisitUpdateInput!): Visit!
+  deleteVisit(where: VisitWhereUniqueInput!): Visit
+  deleteManyVisits(where: VisitWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -40,14 +711,30 @@ type PageInfo {
 }
 
 type Query {
+  candidateLocation(where: CandidateLocationWhereUniqueInput!): CandidateLocation
+  candidateLocations(where: CandidateLocationWhereInput, orderBy: CandidateLocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CandidateLocation]!
+  candidateLocationsConnection(where: CandidateLocationWhereInput, orderBy: CandidateLocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CandidateLocationConnection!
+  duration(where: DurationWhereUniqueInput!): Duration
+  durations(where: DurationWhereInput, orderBy: DurationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Duration]!
+  durationsConnection(where: DurationWhereInput, orderBy: DurationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DurationConnection!
+  location(where: LocationWhereUniqueInput!): Location
+  locations(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Location]!
+  locationsConnection(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LocationConnection!
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  visit(where: VisitWhereUniqueInput!): Visit
+  visits(where: VisitWhereInput, orderBy: VisitOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Visit]!
+  visitsConnection(where: VisitWhereInput, orderBy: VisitOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): VisitConnection!
   node(id: ID!): Node
 }
 
 type Subscription {
+  candidateLocation(where: CandidateLocationSubscriptionWhereInput): CandidateLocationSubscriptionPayload
+  duration(where: DurationSubscriptionWhereInput): DurationSubscriptionPayload
+  location(where: LocationSubscriptionWhereInput): LocationSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  visit(where: VisitSubscriptionWhereInput): VisitSubscriptionPayload
 }
 
 type User {
@@ -55,6 +742,7 @@ type User {
   name: String
   email: String!
   password: String!
+  visits(where: VisitWhereInput, orderBy: VisitOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Visit!]
 }
 
 type UserConnection {
@@ -64,6 +752,19 @@ type UserConnection {
 }
 
 input UserCreateInput {
+  id: ID
+  name: String
+  email: String!
+  password: String!
+  visits: VisitCreateManyWithoutUserInput
+}
+
+input UserCreateOneWithoutVisitsInput {
+  create: UserCreateWithoutVisitsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutVisitsInput {
   id: ID
   name: String
   email: String!
@@ -113,12 +814,33 @@ input UserUpdateInput {
   name: String
   email: String
   password: String
+  visits: VisitUpdateManyWithoutUserInput
 }
 
 input UserUpdateManyMutationInput {
   name: String
   email: String
   password: String
+}
+
+input UserUpdateOneWithoutVisitsInput {
+  create: UserCreateWithoutVisitsInput
+  update: UserUpdateWithoutVisitsDataInput
+  upsert: UserUpsertWithoutVisitsInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateWithoutVisitsDataInput {
+  name: String
+  email: String
+  password: String
+}
+
+input UserUpsertWithoutVisitsInput {
+  update: UserUpdateWithoutVisitsDataInput!
+  create: UserCreateWithoutVisitsInput!
 }
 
 input UserWhereInput {
@@ -178,12 +900,406 @@ input UserWhereInput {
   password_not_starts_with: String
   password_ends_with: String
   password_not_ends_with: String
+  visits_some: VisitWhereInput
   AND: [UserWhereInput!]
 }
 
 input UserWhereUniqueInput {
   id: ID
   email: String
+}
+
+type Visit {
+  id: ID!
+  location: Location
+  duration: Duration
+  placeConfidence: String
+  centerLatE7: Int
+  centerLngE7: Int
+  visitConfidence: Float
+  otherCandidateLocations(where: CandidateLocationWhereInput, orderBy: CandidateLocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CandidateLocation!]
+  user: User
+}
+
+type VisitConnection {
+  pageInfo: PageInfo!
+  edges: [VisitEdge]!
+  aggregate: AggregateVisit!
+}
+
+input VisitCreateInput {
+  id: ID
+  location: LocationCreateOneWithoutVisitInput
+  duration: DurationCreateOneWithoutVisitInput
+  placeConfidence: String
+  centerLatE7: Int
+  centerLngE7: Int
+  visitConfidence: Float
+  otherCandidateLocations: CandidateLocationCreateManyWithoutVisitInput
+  user: UserCreateOneWithoutVisitsInput
+}
+
+input VisitCreateManyWithoutUserInput {
+  create: [VisitCreateWithoutUserInput!]
+  connect: [VisitWhereUniqueInput!]
+}
+
+input VisitCreateOneWithoutDurationInput {
+  create: VisitCreateWithoutDurationInput
+  connect: VisitWhereUniqueInput
+}
+
+input VisitCreateOneWithoutLocationInput {
+  create: VisitCreateWithoutLocationInput
+  connect: VisitWhereUniqueInput
+}
+
+input VisitCreateOneWithoutOtherCandidateLocationsInput {
+  create: VisitCreateWithoutOtherCandidateLocationsInput
+  connect: VisitWhereUniqueInput
+}
+
+input VisitCreateWithoutDurationInput {
+  id: ID
+  location: LocationCreateOneWithoutVisitInput
+  placeConfidence: String
+  centerLatE7: Int
+  centerLngE7: Int
+  visitConfidence: Float
+  otherCandidateLocations: CandidateLocationCreateManyWithoutVisitInput
+  user: UserCreateOneWithoutVisitsInput
+}
+
+input VisitCreateWithoutLocationInput {
+  id: ID
+  duration: DurationCreateOneWithoutVisitInput
+  placeConfidence: String
+  centerLatE7: Int
+  centerLngE7: Int
+  visitConfidence: Float
+  otherCandidateLocations: CandidateLocationCreateManyWithoutVisitInput
+  user: UserCreateOneWithoutVisitsInput
+}
+
+input VisitCreateWithoutOtherCandidateLocationsInput {
+  id: ID
+  location: LocationCreateOneWithoutVisitInput
+  duration: DurationCreateOneWithoutVisitInput
+  placeConfidence: String
+  centerLatE7: Int
+  centerLngE7: Int
+  visitConfidence: Float
+  user: UserCreateOneWithoutVisitsInput
+}
+
+input VisitCreateWithoutUserInput {
+  id: ID
+  location: LocationCreateOneWithoutVisitInput
+  duration: DurationCreateOneWithoutVisitInput
+  placeConfidence: String
+  centerLatE7: Int
+  centerLngE7: Int
+  visitConfidence: Float
+  otherCandidateLocations: CandidateLocationCreateManyWithoutVisitInput
+}
+
+type VisitEdge {
+  node: Visit!
+  cursor: String!
+}
+
+enum VisitOrderByInput {
+  id_ASC
+  id_DESC
+  placeConfidence_ASC
+  placeConfidence_DESC
+  centerLatE7_ASC
+  centerLatE7_DESC
+  centerLngE7_ASC
+  centerLngE7_DESC
+  visitConfidence_ASC
+  visitConfidence_DESC
+}
+
+type VisitPreviousValues {
+  id: ID!
+  placeConfidence: String
+  centerLatE7: Int
+  centerLngE7: Int
+  visitConfidence: Float
+}
+
+input VisitScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  placeConfidence: String
+  placeConfidence_not: String
+  placeConfidence_in: [String!]
+  placeConfidence_not_in: [String!]
+  placeConfidence_lt: String
+  placeConfidence_lte: String
+  placeConfidence_gt: String
+  placeConfidence_gte: String
+  placeConfidence_contains: String
+  placeConfidence_not_contains: String
+  placeConfidence_starts_with: String
+  placeConfidence_not_starts_with: String
+  placeConfidence_ends_with: String
+  placeConfidence_not_ends_with: String
+  centerLatE7: Int
+  centerLatE7_not: Int
+  centerLatE7_in: [Int!]
+  centerLatE7_not_in: [Int!]
+  centerLatE7_lt: Int
+  centerLatE7_lte: Int
+  centerLatE7_gt: Int
+  centerLatE7_gte: Int
+  centerLngE7: Int
+  centerLngE7_not: Int
+  centerLngE7_in: [Int!]
+  centerLngE7_not_in: [Int!]
+  centerLngE7_lt: Int
+  centerLngE7_lte: Int
+  centerLngE7_gt: Int
+  centerLngE7_gte: Int
+  visitConfidence: Float
+  visitConfidence_not: Float
+  visitConfidence_in: [Float!]
+  visitConfidence_not_in: [Float!]
+  visitConfidence_lt: Float
+  visitConfidence_lte: Float
+  visitConfidence_gt: Float
+  visitConfidence_gte: Float
+  AND: [VisitScalarWhereInput!]
+  OR: [VisitScalarWhereInput!]
+  NOT: [VisitScalarWhereInput!]
+}
+
+type VisitSubscriptionPayload {
+  mutation: MutationType!
+  node: Visit
+  updatedFields: [String!]
+  previousValues: VisitPreviousValues
+}
+
+input VisitSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: VisitWhereInput
+  AND: [VisitSubscriptionWhereInput!]
+}
+
+input VisitUpdateInput {
+  location: LocationUpdateOneWithoutVisitInput
+  duration: DurationUpdateOneWithoutVisitInput
+  placeConfidence: String
+  centerLatE7: Int
+  centerLngE7: Int
+  visitConfidence: Float
+  otherCandidateLocations: CandidateLocationUpdateManyWithoutVisitInput
+  user: UserUpdateOneWithoutVisitsInput
+}
+
+input VisitUpdateManyDataInput {
+  placeConfidence: String
+  centerLatE7: Int
+  centerLngE7: Int
+  visitConfidence: Float
+}
+
+input VisitUpdateManyMutationInput {
+  placeConfidence: String
+  centerLatE7: Int
+  centerLngE7: Int
+  visitConfidence: Float
+}
+
+input VisitUpdateManyWithoutUserInput {
+  create: [VisitCreateWithoutUserInput!]
+  delete: [VisitWhereUniqueInput!]
+  connect: [VisitWhereUniqueInput!]
+  set: [VisitWhereUniqueInput!]
+  disconnect: [VisitWhereUniqueInput!]
+  update: [VisitUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [VisitUpsertWithWhereUniqueWithoutUserInput!]
+  deleteMany: [VisitScalarWhereInput!]
+  updateMany: [VisitUpdateManyWithWhereNestedInput!]
+}
+
+input VisitUpdateManyWithWhereNestedInput {
+  where: VisitScalarWhereInput!
+  data: VisitUpdateManyDataInput!
+}
+
+input VisitUpdateOneWithoutDurationInput {
+  create: VisitCreateWithoutDurationInput
+  update: VisitUpdateWithoutDurationDataInput
+  upsert: VisitUpsertWithoutDurationInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: VisitWhereUniqueInput
+}
+
+input VisitUpdateOneWithoutLocationInput {
+  create: VisitCreateWithoutLocationInput
+  update: VisitUpdateWithoutLocationDataInput
+  upsert: VisitUpsertWithoutLocationInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: VisitWhereUniqueInput
+}
+
+input VisitUpdateOneWithoutOtherCandidateLocationsInput {
+  create: VisitCreateWithoutOtherCandidateLocationsInput
+  update: VisitUpdateWithoutOtherCandidateLocationsDataInput
+  upsert: VisitUpsertWithoutOtherCandidateLocationsInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: VisitWhereUniqueInput
+}
+
+input VisitUpdateWithoutDurationDataInput {
+  location: LocationUpdateOneWithoutVisitInput
+  placeConfidence: String
+  centerLatE7: Int
+  centerLngE7: Int
+  visitConfidence: Float
+  otherCandidateLocations: CandidateLocationUpdateManyWithoutVisitInput
+  user: UserUpdateOneWithoutVisitsInput
+}
+
+input VisitUpdateWithoutLocationDataInput {
+  duration: DurationUpdateOneWithoutVisitInput
+  placeConfidence: String
+  centerLatE7: Int
+  centerLngE7: Int
+  visitConfidence: Float
+  otherCandidateLocations: CandidateLocationUpdateManyWithoutVisitInput
+  user: UserUpdateOneWithoutVisitsInput
+}
+
+input VisitUpdateWithoutOtherCandidateLocationsDataInput {
+  location: LocationUpdateOneWithoutVisitInput
+  duration: DurationUpdateOneWithoutVisitInput
+  placeConfidence: String
+  centerLatE7: Int
+  centerLngE7: Int
+  visitConfidence: Float
+  user: UserUpdateOneWithoutVisitsInput
+}
+
+input VisitUpdateWithoutUserDataInput {
+  location: LocationUpdateOneWithoutVisitInput
+  duration: DurationUpdateOneWithoutVisitInput
+  placeConfidence: String
+  centerLatE7: Int
+  centerLngE7: Int
+  visitConfidence: Float
+  otherCandidateLocations: CandidateLocationUpdateManyWithoutVisitInput
+}
+
+input VisitUpdateWithWhereUniqueWithoutUserInput {
+  where: VisitWhereUniqueInput!
+  data: VisitUpdateWithoutUserDataInput!
+}
+
+input VisitUpsertWithoutDurationInput {
+  update: VisitUpdateWithoutDurationDataInput!
+  create: VisitCreateWithoutDurationInput!
+}
+
+input VisitUpsertWithoutLocationInput {
+  update: VisitUpdateWithoutLocationDataInput!
+  create: VisitCreateWithoutLocationInput!
+}
+
+input VisitUpsertWithoutOtherCandidateLocationsInput {
+  update: VisitUpdateWithoutOtherCandidateLocationsDataInput!
+  create: VisitCreateWithoutOtherCandidateLocationsInput!
+}
+
+input VisitUpsertWithWhereUniqueWithoutUserInput {
+  where: VisitWhereUniqueInput!
+  update: VisitUpdateWithoutUserDataInput!
+  create: VisitCreateWithoutUserInput!
+}
+
+input VisitWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  location: LocationWhereInput
+  duration: DurationWhereInput
+  placeConfidence: String
+  placeConfidence_not: String
+  placeConfidence_in: [String!]
+  placeConfidence_not_in: [String!]
+  placeConfidence_lt: String
+  placeConfidence_lte: String
+  placeConfidence_gt: String
+  placeConfidence_gte: String
+  placeConfidence_contains: String
+  placeConfidence_not_contains: String
+  placeConfidence_starts_with: String
+  placeConfidence_not_starts_with: String
+  placeConfidence_ends_with: String
+  placeConfidence_not_ends_with: String
+  centerLatE7: Int
+  centerLatE7_not: Int
+  centerLatE7_in: [Int!]
+  centerLatE7_not_in: [Int!]
+  centerLatE7_lt: Int
+  centerLatE7_lte: Int
+  centerLatE7_gt: Int
+  centerLatE7_gte: Int
+  centerLngE7: Int
+  centerLngE7_not: Int
+  centerLngE7_in: [Int!]
+  centerLngE7_not_in: [Int!]
+  centerLngE7_lt: Int
+  centerLngE7_lte: Int
+  centerLngE7_gt: Int
+  centerLngE7_gte: Int
+  visitConfidence: Float
+  visitConfidence_not: Float
+  visitConfidence_in: [Float!]
+  visitConfidence_not_in: [Float!]
+  visitConfidence_lt: Float
+  visitConfidence_lte: Float
+  visitConfidence_gt: Float
+  visitConfidence_gte: Float
+  otherCandidateLocations_some: CandidateLocationWhereInput
+  user: UserWhereInput
+  AND: [VisitWhereInput!]
+}
+
+input VisitWhereUniqueInput {
+  id: ID
 }
 `
       }

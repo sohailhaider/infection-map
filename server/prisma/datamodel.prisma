@@ -3,4 +3,44 @@ type User {
     name: String
     email: String!  @unique
     password: String!
+    visits: [Visit!]
+}
+
+type Visit {
+    id: ID! @id
+    location: Location @relation(link: INLINE)
+    duration: Duration @relation(link: INLINE)
+    placeConfidence: String
+    centerLatE7: Int
+    centerLngE7: Int
+    visitConfidence: Float
+    otherCandidateLocations: [CandidateLocation!]
+    user: User @relation(link: INLINE)
+}
+
+type Location {
+    id: ID! @id
+    latitudeE7: Int
+    longitudeE7: Int
+    placeId: String
+    address: String
+    name: String
+    sourceInfo: String
+    visit: Visit
+}
+
+type Duration {
+    id: ID! @id
+    startTimestampMs: String
+    endTimestampMs: String
+    visit: Visit
+}
+
+type CandidateLocation {
+    id: ID! @id
+    latitudeE7: Int
+    longitudeE7: Int
+    placeId: String
+    locationConfidence: Float
+    visit: Visit @relation(link: INLINE)
 }
