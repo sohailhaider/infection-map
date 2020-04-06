@@ -7,6 +7,9 @@ type Query {
 type Mutation {
     signup(name: String, email: String!, password: String!): AuthPayload
     login(email: String!, password: String!): AuthPayload
+    addVisit(placeConfidence: String, centerLatE7: Int, centerLngE7: Int, visitConfidence: Float): Visit
+    addLocation(visitId: ID!, latitudeE7: Int, longitudeE7: Int, placeId: String, address: String, name: String, sourceInfo: String): Location
+    addDuration(visitId: ID!, startTimestampMs: String, endTimestampMs: String): Duration
 }
 
 type User {
@@ -31,6 +34,7 @@ type Visit {
     centerLngE7: Int
     visitConfidence: Float
     otherCandidateLocations: [CandidateLocation!]
+    user: User
 }
 
 type Location {
