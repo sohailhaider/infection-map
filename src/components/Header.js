@@ -1,5 +1,6 @@
 import React from 'react';
 import Login from './Login';
+import { Link } from "react-router-dom";
 
 const HeaderStyle = {
     width: "100%",
@@ -7,11 +8,32 @@ const HeaderStyle = {
 }
 
 let Header = props => {
+    
+    let handleLogOut = e => {
+        props.setLoggedInUser(null);
+    }
+    
     return (
         <div style={HeaderStyle}>
-            <Login 
+            <Link to="/">Home</Link>
+            {
+                props.loggedInUser && 
+                <div>
+                    <Link to="/Upload">
+                    Upload
+                    </Link>
+                    <button onClick={handleLogOut}>
+                        Logout
+                    </button>
+                </div>
+            }
+            {
+                !props.loggedInUser &&
+                <Login 
                 setLoggedInUser={props.setLoggedInUser} 
                 />
+            }
+            
         </div>
         )
 }

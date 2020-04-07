@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
-import MapHome from './MapHome';
+import AppHome from './AppHome';
 import Header from './Header';
+import {
+    BrowserRouter
+} from "react-router-dom";
 
 function App() {
   let [loggedInUser, setLoggedInUser] = useState(null);
@@ -9,12 +12,13 @@ function App() {
   
   return (
     <div className="App">
-      <Header 
-        loggedInUser={loggedInUser} 
-        setLoggedInUser={setLoggedInUser} 
-        />
-
-      <MapHome/>
+      <BrowserRouter>
+        <Header 
+          loggedInUser={loggedInUser} 
+          setLoggedInUser={setLoggedInUser} 
+          />
+        <AppHome loggedInUser={loggedInUser}/>
+      </BrowserRouter>
     </div>
   );
 }

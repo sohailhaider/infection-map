@@ -22,8 +22,7 @@ let LoginPopup = props => {
                     password: password
                 }
             });
-            props.toggleLoginPopup();
-            console.log('response', response && response.data);
+            props.handleSuccessFullLogin(response && response.data);
         } catch(e) {
             setErrorMsg(e.message.split(":").slice(-1)[0])
         }
@@ -38,7 +37,7 @@ let LoginPopup = props => {
                     </h1>
                     <hr />
                     {
-                        errorMsg != '' &&
+                        errorMsg !== '' &&
                         <div className="errorMsg">
                             {
                                 errorMsg
@@ -51,7 +50,7 @@ let LoginPopup = props => {
                     <br />
                     <input type="submit" style={loginStyle} />
                     <br/><br/>
-                    <a href="#" onClick={props.toggleLoginPopup}>Cancel</a>
+                    <button onClick={props.toggleLoginPopup}>Cancel</button>
                 </form>
             </span>
         </div>

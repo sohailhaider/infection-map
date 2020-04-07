@@ -9,10 +9,16 @@ let Login = props => {
         setShowLogin(!showLogin);
     };
     
+    let handleSuccessFullLogin = userData => {
+        toggleLoginPopup();
+        let loginData = userData.login;
+        props.setLoggedInUser(loginData);
+    }
+    
     return (
         <div>
             {showLogin &&
-                <LoginPopup toggleLoginPopup={toggleLoginPopup} />   
+                <LoginPopup toggleLoginPopup={toggleLoginPopup} handleSuccessFullLogin={handleSuccessFullLogin} />   
             }
             <button onClick={toggleLoginPopup}>
                 Login
