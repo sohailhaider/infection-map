@@ -33,3 +33,17 @@ export const ADD_DURATION_MUTATION = gql`
     }
   }
 `;
+
+export const GET_ALL_VISITS_QUERY = gql`
+  query {
+    getAllVisits {
+      id,
+      location {
+        latitudeE7,
+        longitudeE7,
+        placeId,
+        name
+      }
+    }
+  }
+`;
