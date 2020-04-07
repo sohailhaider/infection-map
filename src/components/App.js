@@ -1,9 +1,20 @@
-import React from 'react';
+import React, {useState} from 'react';
+import MapHome from './MapHome';
+import Header from './Header';
 
 function App() {
+  let [loggedInUser, setLoggedInUser] = useState(null);
+  
+  
+  
   return (
     <div className="App">
-    welcome
+      <Header 
+        loggedInUser={loggedInUser} 
+        setLoggedInUser={setLoggedInUser} 
+        />
+
+      <MapHome/>
     </div>
   );
 }
