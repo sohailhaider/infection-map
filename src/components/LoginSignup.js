@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
 import LoginPopup from './LoginPopup';
 import SignupPopup from './SignupPopup';
+import { useAlert } from 'react-alert'
 
 let LoginSignup = props => {
+    const alert = useAlert();
     
     let [showLoginPopup, setShowLoginPopup] = useState(false);
     let [showSignupPopup, setShowSignupPopup] = useState(false);
@@ -17,6 +19,7 @@ let LoginSignup = props => {
     let handleSuccessFullLogin = userData => {
         toggleLoginPopup();
         let loginData = userData.login;
+        alert.success("User logged in.")
         localStorage.setItem('token', loginData.token);
         props.setLoggedInUser(loginData);
     }
@@ -24,6 +27,7 @@ let LoginSignup = props => {
     let handleSuccessfullSignup = userData => {
         toggleSignupPopup();
         let signupData = userData.signup;
+        alert.success("Signup success, logging in...")
         localStorage.setItem('token', signupData.token);
         props.setLoggedInUser(signupData);
     }
@@ -34,10 +38,10 @@ let LoginSignup = props => {
                 <LoginPopup toggleLoginPopup={toggleLoginPopup} handleSuccessFullLogin={handleSuccessFullLogin} />   
             }
             <button onClick={toggleLoginPopup}>
-                Login
+                Login to upload your data
             </button>
             
-            <button onClick={toggleSignupPopup}>
+            <button onClick={toggleSignupPopup} style={{marginLeft:"5px"}}>
                 Signup
             </button>
             {showSignupPopup &&

@@ -1,6 +1,7 @@
 import React from 'react';
 import LoginSignup from './LoginSignup';
 import { Link } from "react-router-dom";
+import { useAlert } from 'react-alert'
 
 const HeaderStyle = {
     width: "100%",
@@ -8,8 +9,10 @@ const HeaderStyle = {
 }
 
 let Header = props => {
+    const alert = useAlert();
     
     let handleLogOut = e => {
+        alert.success("Logged out successfully");
         localStorage.removeItem('token');
         props.setLoggedInUser(null);
     }
