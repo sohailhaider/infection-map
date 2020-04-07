@@ -9,6 +9,16 @@ import { createHttpLink } from 'apollo-link-http';
 import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
+import { transitions, positions, Provider as AlertProvider } from 'react-alert'
+import AlertTemplate from 'react-alert-template-basic'
+
+const alertOptions = {
+  position: positions.TOP_CENTER,
+  timeout: 5000,
+  offset: '30px',
+  transition: transitions.SCALE
+}
+
 const httpLink = createHttpLink({
     uri: process.env.REACT_APP_GRAPHQL_LINK
 });
@@ -32,7 +42,9 @@ const client = new ApolloClient({
 
 ReactDOM.render(
     <ApolloProvider client={client}>
-        <App />
+      <AlertProvider template={AlertTemplate} {...alertOptions}>
+          <App />
+      </AlertProvider>
     </ApolloProvider>,
   document.getElementById('root')
 );

@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { withApollo, useMutation } from 'react-apollo';
 import { ADD_VISIT_MUTATION, ADD_LOCATION_MUTATION, ADD_DURATION_MUTATION } from '../graphql/Visit.graphql';
 import { Redirect } from "react-router-dom";
+import { useAlert } from 'react-alert'
 var moment = require('moment');
 
 let Timeline = props => {
+    const alert = useAlert();
     let selectedPlaces = [];
     
     let [isCompleted, setIsCompleted] = useState(false);
@@ -24,7 +26,7 @@ let Timeline = props => {
     
     const handleShare = async e => {
         if(selectedPlaces.length === 0) {
-            alert("Please select at least 1 place from table belove to share.");
+            alert.error("Please select at least 1 place from table belove to share.");
         }
         console.log(selectedPlaces);
         await Promise.all(
@@ -60,11 +62,11 @@ let Timeline = props => {
                     })
                     
                 } catch(e) {
-                    alert(e.message.split(":").slice(-1)[0])
+                    alert.error(e.message.split(":").slice(-1)[0])
                 }
             })
         );
-        alert("Thanks for providing data to help the community")
+        alert.success("Thanks for providing data to help the community")
         setIsCompleted(true);
     }
     return (

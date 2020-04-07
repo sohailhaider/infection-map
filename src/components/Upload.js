@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import Timeline from './Timeline';
+import { useAlert } from 'react-alert'
 
 let Upload = props => {
+    const alert = useAlert();
     let fileReader;
     
     let [timeline, setTimeline] = useState(null);
@@ -10,7 +12,7 @@ let Upload = props => {
     const handleFileAfterRead = e => {
         try {
             if(!fileReader.result || fileReader.result === '') {
-                alert("Invalid/Empty file input");
+                alert.error("Invalid/Empty file input");
                 return;
             }
             const data = JSON.parse(fileReader.result);
@@ -19,7 +21,7 @@ let Upload = props => {
             
         } catch(e) {
             console.log(e);
-            alert(e.message);
+            alert.error(e.message);
         }
     }
     

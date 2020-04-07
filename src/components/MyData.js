@@ -1,10 +1,12 @@
 import React from 'react';
 import { withApollo, useQuery, useMutation } from 'react-apollo';
 import { GET_USER_VISITS_QUERY, DELETE_USER_VISITS_MUTATION } from '../graphql/User.graphql';
-import { confirmAlert } from 'react-confirm-alert'; // Import
-import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import { useAlert } from 'react-alert'
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const MyData = props => {
+    const alert = useAlert();
     const { data } = useQuery(GET_USER_VISITS_QUERY, {
         fetchPolicy: 'network-only'
     });
@@ -19,13 +21,13 @@ const MyData = props => {
               label: 'Yes',
               onClick: async () => {
                   await deleteUserVisits();
-                  alert("Your entries has been delete.")
+                  alert.success("Your entries has been delete.")
                   window.location.reload();
               }
             },
             {
               label: 'No',
-              onClick: () => alert('We will put your data to good use :)')
+              onClick: () => alert.show('We will put your data to good use :)')
             }
           ]
         });
