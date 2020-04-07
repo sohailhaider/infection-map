@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "apollo-cache-inmemory": "^1.6.5",
     "apollo-client": "^2.6.8",
+    "apollo-link-context": "^1.0.19",
     "apollo-link-http": "^1.5.16",
     "google-maps-react": "^2.0.2",
     "graphql": "^15.0.0",

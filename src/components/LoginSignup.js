@@ -17,12 +17,14 @@ let LoginSignup = props => {
     let handleSuccessFullLogin = userData => {
         toggleLoginPopup();
         let loginData = userData.login;
+        localStorage.setItem('token', loginData.token);
         props.setLoggedInUser(loginData);
     }
     
     let handleSuccessfullSignup = userData => {
         toggleSignupPopup();
         let signupData = userData.signup;
+        localStorage.setItem('token', signupData.token);
         props.setLoggedInUser(signupData);
     }
     

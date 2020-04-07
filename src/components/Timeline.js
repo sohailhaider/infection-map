@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { withApollo, useMutation } from 'react-apollo';
+import { ADD_VISIT_MUTATION, ADD_LOCATION_MUTATION, ADD_DURATION_MUTATION } from '../graphql/Visit.graphql';
+import { Redirect } from "react-router-dom";
 var moment = require('moment');
 
 let Timeline = props => {
     let selectedPlaces = [];
+    
+    let [isCompleted, setIsCompleted] = useState(false);
+    
+    const [addVisitMutation] = useMutation(ADD_VISIT_MUTATION);
+    const [addLocationMutation] = useMutation(ADD_LOCATION_MUTATION);
+    const [addDurationMutation] = useMutation(ADD_DURATION_MUTATION);
+    
     const handleTogglePlaceSelection = place => {
         let index = selectedPlaces.indexOf(place);
         if(index > -1) {
@@ -12,14 +22,57 @@ let Timeline = props => {
         }
     }
     
-    const handleShare = e => {
+    const handleShare = async e => {
         if(selectedPlaces.length === 0) {
             alert("Please select at least 1 place from table belove to share.");
         }
         console.log(selectedPlaces);
+        await Promise.all(
+            selectedPlaces.map(async visitedPlace => {
+                try {
+                    let response = await addVisitMutation({
+                        variables: {
+                            placeConfidence: visitedPlace.placeVisit.placeConfidence, 
+                      		centerLatE7: visitedPlace.placeVisit.centerLatE7, 
+                      		centerLngE7: visitedPlace.placeVisit.centerLngE7, 
+                      		visitConfidence: visitedPlace.placeVisit.visitConfidence
+                        }
+                    });
+                    let visitId = response.data.addVisit.id;
+                    
+                    response = await addLocationMutation({
+                        variables: {
+                            visitId: visitId,
+                            latitudeE7: visitedPlace.placeVisit.location.latitudeE7, 
+                            longitudeE7: visitedPlace.placeVisit.location.longitudeE7, 
+                            placeId: visitedPlace.placeVisit.location.placeId, 
+                            address: visitedPlace.placeVisit.location.address, 
+                            name: visitedPlace.placeVisit.location.name
+                        }
+                    });
+                    
+                    response = await addDurationMutation({
+                        variables: {
+                            visitId: visitId, 
+                            startTimestampMs: visitedPlace.placeVisit.duration.startTimestampMs, 
+                            endTimestampMs: visitedPlace.placeVisit.duration.endTimestampMs
+                        }
+                    })
+                    
+                } catch(e) {
+                    alert(e.message.split(":").slice(-1)[0])
+                }
+            })
+        );
+        alert("Thanks for providing data to help the community")
+        setIsCompleted(true);
     }
     return (
         <div>
+            {
+                isCompleted && 
+                <Redirect to="/"/>
+            }
             Select Visits data you want to share anynomously <button onClick={handleShare}>Share Selected Locations</button>
             <table>
                 <thead>
@@ -107,4 +160,4 @@ let Timeline = props => {
         )
 };
 
-export default Timeline;
+export default withApollo(Timeline);

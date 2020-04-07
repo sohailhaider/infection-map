@@ -10,6 +10,7 @@ const HeaderStyle = {
 let Header = props => {
     
     let handleLogOut = e => {
+        localStorage.removeItem('token');
         props.setLoggedInUser(null);
     }
     
