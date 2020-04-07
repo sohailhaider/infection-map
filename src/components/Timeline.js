@@ -2,9 +2,25 @@ import React from 'react';
 var moment = require('moment');
 
 let Timeline = props => {
+    let selectedPlaces = [];
+    const handleTogglePlaceSelection = place => {
+        let index = selectedPlaces.indexOf(place);
+        if(index > -1) {
+            selectedPlaces.splice(index, 1);
+        } else {
+            selectedPlaces.push(place);
+        }
+    }
+    
+    const handleShare = e => {
+        if(selectedPlaces.length === 0) {
+            alert("Please select at least 1 place from table belove to share.");
+        }
+        console.log(selectedPlaces);
+    }
     return (
         <div>
-            Select Visits data you want to share anynomously 
+            Select Visits data you want to share anynomously <button onClick={handleShare}>Share Selected Locations</button>
             <table>
                 <thead>
                     <tr>
@@ -28,11 +44,10 @@ let Timeline = props => {
                 <tbody>
                     { props.timeline &&
                         props.timeline.map((visitValue, index) => {
-                            console.log(visitValue)
                             return(
                                 <tr>
                                     <td>
-                                        <input type="checkbox" />
+                                        <input type="checkbox" onChange={e=>handleTogglePlaceSelection(visitValue)}/>
                                     </td>
                                     <td>
                                         <ul key={index}>
