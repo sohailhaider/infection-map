@@ -17,7 +17,8 @@ let AppHome = props => {
                 </Route>
                 <Route exact path="/upload">
                     {
-                        props.loggedInUser? <Upload loggedInUser={props.loggedInUser}/> : <Redirect to="/" />
+                    <Upload loggedInUser={props.loggedInUser}/>
+                        // props.loggedInUser? <Upload loggedInUser={props.loggedInUser}/> : <Redirect to="/" />
                     }
                 </Route>
             </Switch>

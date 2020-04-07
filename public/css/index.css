@@ -33,3 +33,10 @@
   background-color: white;
   padding-bottom: 40px
 }
+table {
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
