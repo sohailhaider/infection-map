@@ -5,7 +5,9 @@
  - this will start up the services for `prisma` and `mongodb`
  - install prisma cli grobally via `npm install -g prisma`
  - use `prisma deploy` command to deploy our database.
- - we can check databse via hitting this URL and if it prompts for token then use `prisma token` command in server to generate the token and provide in the application `localhost:4466/maps/dev/_admin`
+ - we can check databse via hitting this URL and if it prompts for token then use `prisma token` command in server directory to generate the token and provide in the application `localhost:4466/maps/dev/_admin`
+ - use `npm start` command to start graphql server.
+ 
 
 # Frontend Application
 
