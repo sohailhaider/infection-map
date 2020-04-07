@@ -1,3 +1,14 @@
+# Backend Application and other Services
+
+ - Our backend is based on Docker composer, please make sure you have `docker` installed your machine.
+ - move to server director and try `cd server` & `docker-compose up`
+ - this will start up the services for `prisma` and `mongodb`
+ - install prisma cli grobally via `npm install -g prisma`
+ - use `prisma deploy` command to deploy our database.
+ - we can check databse via hitting this URL and if it prompts for token then use `prisma token` command in server to generate the token and provide in the application `localhost:4466/maps/dev/_admin`
+
+# Frontend Application
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
