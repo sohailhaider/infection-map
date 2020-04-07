@@ -21,3 +21,6 @@
   background-color: white;
   padding-bottom: 40px
 }
+.errorMsg {
+  color: red;
+}

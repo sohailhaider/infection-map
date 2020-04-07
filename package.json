@@ -11,6 +11,7 @@
     "apollo-link-http": "^1.5.16",
     "google-maps-react": "^2.0.2",
     "graphql": "^15.0.0",
+    "graphql-tag": "^2.10.3",
     "react": "^16.13.1",
     "react-apollo": "^3.1.4",
     "react-dom": "^16.13.1",
