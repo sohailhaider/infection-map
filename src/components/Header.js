@@ -1,5 +1,5 @@
 import React from 'react';
-import Login from './Login';
+import LoginSignup from './LoginSignup';
 import { Link } from "react-router-dom";
 
 const HeaderStyle = {
@@ -29,7 +29,7 @@ let Header = props => {
             }
             {
                 !props.loggedInUser &&
-                <Login 
+                <LoginSignup 
                 setLoggedInUser={props.setLoggedInUser} 
                 />
             }

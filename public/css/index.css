@@ -24,3 +24,12 @@
 .errorMsg {
   color: red;
 }
+.signup-body {
+  position: absolute;
+  top: 25%;
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  width: 350px;
+  background-color: white;
+  padding-bottom: 40px
+}
