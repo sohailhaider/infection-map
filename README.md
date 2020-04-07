@@ -7,9 +7,15 @@
  - use `prisma deploy` command to deploy our database.
  - we can check databse via hitting this URL and if it prompts for token then use `prisma token` command in server directory to generate the token and provide in the application `localhost:4466/maps/dev/_admin`
  - use `npm start` command to start graphql server.
+ - your local server should be up and running at `http://localhost:4500`
+
+
  
 
 # Frontend Application
+ - create a `.env` in root directory
+ - provide your google api key with name of `REACT_APP_GOOGLE_KEY` in `.env.
+ - provide your backend server user with name of `REACT_APP_GRAPHQL_LINK` in `.env`. in case of local it should be `http://localhost:4500`
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
