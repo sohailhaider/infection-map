@@ -4,6 +4,14 @@ const { APP_SECRET, getUserId } = require('../../utils.js');
 
 
 async function signup(parent, args, context) {
+  
+  const userExists = await context.prisma.$exists.user({
+          email: args.email,
+        });
+  if (userExists) {
+    throw new Error('Email already exists, try login.')
+  }
+  
   const password = await bcrypt.hash(args.password, 10)
   const user = await context.prisma.createUser({ ...args, password })
 
