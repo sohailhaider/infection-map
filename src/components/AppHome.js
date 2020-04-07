@@ -1,6 +1,7 @@
 import React from 'react';
 import MapHome from './MapHome';
 import Upload from './Upload';
+import MyData from './MyData';
 
 import {
     Switch,
@@ -20,6 +21,12 @@ let AppHome = props => {
                     // <Upload loggedInUser={props.loggedInUser}/>
                         props.loggedInUser? <Upload loggedInUser={props.loggedInUser}/> : <Redirect to="/" />
                     }
+                </Route>
+                <Route exact path="/me">
+                    {
+                        props.loggedInUser? <MyData loggedInUser={props.loggedInUser}/> : <Redirect to="/" />
+                    }
+                    
                 </Route>
             </Switch>
         </div>

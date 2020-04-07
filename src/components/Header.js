@@ -16,17 +16,20 @@ let Header = props => {
     
     return (
         <div style={HeaderStyle}>
-            <Link to="/">Home</Link>
+            <Link to="/" style={{margin: "5px"}}>Home</Link>
             {
                 props.loggedInUser && 
-                <div>
-                    <Link to="/Upload">
-                    Upload
+                <span>
+                    <Link to="/Upload" style={{margin: "5px"}}>
+                    Upload new data
+                    </Link>
+                    <Link to="/me" style={{margin: "5px"}}>
+                     My Information
                     </Link>
                     <button onClick={handleLogOut}>
                         Logout
                     </button>
-                </div>
+                </span>
             }
             {
                 !props.loggedInUser &&

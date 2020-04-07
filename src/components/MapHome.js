@@ -2,6 +2,7 @@ import React from 'react';
 import MapLoading from './MapLoading';
 import { withApollo, useQuery } from 'react-apollo';
 import { GET_ALL_VISITS_QUERY } from '../graphql/Visit.graphql';
+
 import {
     Map,
     GoogleApiWrapper,
@@ -9,7 +10,9 @@ import {
 } from 'google-maps-react';
 
 let MapHome = props => {
-    const { loading, error, data } = useQuery(GET_ALL_VISITS_QUERY);
+    const { data } = useQuery(GET_ALL_VISITS_QUERY, {
+        fetchPolicy: 'network-only'
+    });
     let bounds = new props.google.maps.LatLngBounds();
     if(data) {  //to Fit data
         for (let i = 0; i < data.getAllVisits.length; i++) {
@@ -21,7 +24,10 @@ let MapHome = props => {
     }
     return(
         <span>
-            <Map google={props.google} zoom={8} bounds={bounds}>
+            <Map google={props.google} zoom={8} bounds={bounds} initialCenter={{
+            lat: 42.39,
+            lng: -72.52
+        }}>
                 {
                     data && 
                     data.getAllVisits.map(place=> {
